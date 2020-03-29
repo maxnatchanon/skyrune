@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Animator animator;
     public Camera cam;
 
+    public PlayerHoverText ht;
+
 	Vector2 movement;
 
     void Update() {
