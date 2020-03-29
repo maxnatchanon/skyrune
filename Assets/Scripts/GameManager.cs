@@ -2,26 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class GameManager : MonoBehaviour {
+	public static GameManagerInstance instance {
+		get { return GameManagerInstance.instance; }
+	}
+}
+
+/* Game Manager Instance */
+
 public enum Power {
 	Fireball, Dash, Freeze
 }
 
-public class GameManager : MonoBehaviour {
-	static GameManager instance;
+public class GameManagerInstance {
+
+	/* Singleton Setup */
+
+	private static GameManagerInstance _instance;
+
+	public static GameManagerInstance instance {
+		get {
+			if (_instance == null) {
+				_instance = new GameManagerInstance();
+			}
+			return _instance;
+		}
+	}
+
+	private GameManagerInstance() {
+		InitializeGame();
+	}
+
+	/* Game Logic */
 
 	public int numberOfRooms;
 	public bool[] hasClearedRoom;
 	public Dictionary<Power, bool> hasUnlockedPower;
-
-	void Awake() {
-		if (instance != null) {
-			Destroy(gameObject);
-		} else {
-			instance = this;
-			DontDestroyOnLoad(gameObject);
-			InitializeGame();
-		}
-	}
 
 	void InitializeGame() {
 		numberOfRooms = 3;
@@ -32,4 +48,5 @@ public class GameManager : MonoBehaviour {
 			hasUnlockedPower[power] = false;
 		}
 	}
+
 }
