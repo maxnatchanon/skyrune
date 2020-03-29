@@ -37,6 +37,8 @@ public class GameManager {
 	public bool[] hasClearedRoom;
 	public Dictionary<Power, bool> hasUnlockedPower;
 
+	public int maxHealth = 100;
+	public int health = 34;
 	public Weapon selectedWeapon;
 
 	void InitializeGame() {
@@ -53,6 +55,7 @@ public class GameManager {
 
 	public void SelectWeapon(Weapon weapon) {
 		if (weapon == selectedWeapon) return;
+		if (weapon == Weapon.Fireball && !hasUnlockedPower[Power.Fireball]) return;
 		selectedWeapon = weapon;
 		// TODO: Play some sound here?
 	}
