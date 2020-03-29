@@ -26,6 +26,14 @@ public class PlayerMovement : MonoBehaviour {
         // Use for attacking?
         // Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         // Vector2 lookDir = (mousePos - rb.position).normalized;
+
+        if (Input.GetKeyDown("q")) {
+            GameManager.instance.SelectWeapon(Weapon.Sword);
+        }
+        if (Input.GetKeyDown("e")) {
+            GameManager.instance.SelectWeapon(Weapon.Fireball);
+        }
+
     }
 
     void FixedUpdate() {

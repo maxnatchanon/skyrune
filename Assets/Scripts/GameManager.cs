@@ -1,8 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum Power {
 	Fireball, Dash, Freeze
+}
+
+public enum Weapon {
+	Sword, Fireball
+}
+
+public enum Skill {
+	Freeze
 }
 
 public class GameManager {
@@ -28,6 +37,8 @@ public class GameManager {
 	public bool[] hasClearedRoom;
 	public Dictionary<Power, bool> hasUnlockedPower;
 
+	public Weapon selectedWeapon;
+
 	void InitializeGame() {
 		numberOfRooms = 3;
 		hasClearedRoom = new bool[] {false, false, false};
@@ -36,6 +47,14 @@ public class GameManager {
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
 			hasUnlockedPower[power] = false;
 		}
+
+		selectedWeapon = Weapon.Sword;
+	}
+
+	public void SelectWeapon(Weapon weapon) {
+		if (weapon == selectedWeapon) return;
+		selectedWeapon = weapon;
+		// TODO: Play some sound here?
 	}
 
 }
