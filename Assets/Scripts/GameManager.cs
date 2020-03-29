@@ -1,35 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-public class GameManager : MonoBehaviour {
-	public static GameManagerInstance instance {
-		get { return GameManagerInstance.instance; }
-	}
-}
-
-/* Game Manager Instance */
 
 public enum Power {
 	Fireball, Dash, Freeze
 }
 
-public class GameManagerInstance {
+public class GameManager {
 
 	/* Singleton Setup */
 
-	private static GameManagerInstance _instance;
+	private static GameManager _instance;
 
-	public static GameManagerInstance instance {
+	public static GameManager instance {
 		get {
-			if (_instance == null) {
-				_instance = new GameManagerInstance();
-			}
+			if (_instance == null) _instance = new GameManager();
 			return _instance;
 		}
 	}
 
-	private GameManagerInstance() {
+	private GameManager() {
 		InitializeGame();
 	}
 
