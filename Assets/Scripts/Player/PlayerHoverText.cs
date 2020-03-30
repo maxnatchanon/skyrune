@@ -20,7 +20,8 @@ public class PlayerHoverText : MonoBehaviour {
 		}
     }
 
-    public void SetText(string text) {
+    public void SetText(string text, float duration) {
+    	this.duration = duration;
     	currentTime = 0;
     	hoverText.text = text;
     	hoverText.gameObject.SetActive(true);
