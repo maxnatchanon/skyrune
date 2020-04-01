@@ -7,8 +7,7 @@ public class Potion : MonoBehaviour {
 	public Text numberText;
 
     void Update() {
-        // TODO: Poll number of potions
-        int number = 43;
+        int number = GameManager.instance.numberOfPotions;
         numberText.text = number.ToString();
     }
 }

@@ -41,6 +41,8 @@ public class GameManager {
 	public int health = 34;
 	public Weapon selectedWeapon;
 
+	public int numberOfPotions = 0;
+
 	void InitializeGame() {
 		numberOfRooms = 3;
 		hasClearedRoom = new bool[] {false, false, false};

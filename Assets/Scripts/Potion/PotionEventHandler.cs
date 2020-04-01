@@ -21,7 +21,8 @@ public class PotionEventHandler : MonoBehaviour {
     	if (distance <= 1.5f) {
     		playerText.SetText("Potion\n(Press C to pick up)", 0.1f);
     		if (Input.GetKeyDown("c")) {
-    			// TODO: Pick up potion
+                GameManager.instance.numberOfPotions++;
+                Destroy(gameObject);
     		}
     	}
     }
