@@ -391,5 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ce4ccd3d78040c2af547ad879af601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomPower: 2
   player: {fileID: 0}
   playerText: {fileID: 0}

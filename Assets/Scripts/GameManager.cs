@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Power {
 	Fireball, Dash, Freeze
@@ -60,6 +61,17 @@ public class GameManager {
 		if (weapon == Weapon.Fireball && !hasUnlockedPower[Power.Fireball]) return;
 		selectedWeapon = weapon;
 		// TODO: Play some sound here?
+	}
+
+	public void EnterDoor(Power power) {
+		// TODO: Load Scene?
+		if (power == Power.Fireball) {
+			Debug.Log("FIREBALL");
+		} else if (power == Power.Dash) {
+			Debug.Log("DASH");
+		} else if (power == Power.Freeze) {
+			Debug.Log("FREEZE");
+		}
 	}
 
 }

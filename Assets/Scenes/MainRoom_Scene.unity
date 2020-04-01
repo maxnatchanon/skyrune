@@ -5798,6 +5798,11 @@ PrefabInstance:
       propertyPath: playerText
       value: 
       objectReference: {fileID: 946063289}
+    - target: {fileID: 2914342942083325980, guid: 4da0b3a151dd4401bbbc0dee6d4616bd,
+        type: 3}
+      propertyPath: roomPower
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2914342942083325981, guid: 4da0b3a151dd4401bbbc0dee6d4616bd,
         type: 3}
       propertyPath: player
@@ -5942,5 +5947,10 @@ PrefabInstance:
       propertyPath: playerText
       value: 
       objectReference: {fileID: 946063289}
+    - target: {fileID: 7373655395900330622, guid: c205fb006efac49e5a320fb99608f604,
+        type: 3}
+      propertyPath: roomPower
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c205fb006efac49e5a320fb99608f604, type: 3}

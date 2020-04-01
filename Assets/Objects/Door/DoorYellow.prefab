@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ce4ccd3d78040c2af547ad879af601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomPower: 1
   player: {fileID: 0}
   playerText: {fileID: 0}
 --- !u!1 &2914342942395678179
