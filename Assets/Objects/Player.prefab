@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  tf: {fileID: 8142766439891363118}
   rb: {fileID: 8142766439891363115}
   animator: {fileID: 4855844770438152037}
   cam: {fileID: 0}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed = 5f;
+	public float dashSpeed = 8f;
 
 	public Rigidbody2D rb;
 	public Animator animator;
@@ -16,7 +17,13 @@ public class PlayerMovement : MonoBehaviour {
 	float meleeAttackInterval = 0.4f;
 	float currentMeleeAttackTime = 0.4f;
 
+	float dashInterval = 1f;
+	float dashTime = 0.25f;
+	float currentDashTime = 0.25f;
+	Vector2 dashDir;
+
     void Update() {
+    	// Movement
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
@@ -26,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
             animator.SetFloat("WalkVertical", movement.y);
         }
 
+        // Attack
         if (Input.GetMouseButtonDown(0) && currentMeleeAttackTime >= meleeAttackInterval) {
         	currentMeleeAttackTime = 0f;
         	Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -33,25 +41,38 @@ public class PlayerMovement : MonoBehaviour {
         	AttackMelee(lookDir);
         }
 
-        if (Input.GetKeyDown("q")) {
+        // Switch Weapon
+        if (Input.GetKeyDown(KeyCode.Q)) {
             GameManager.instance.SelectWeapon(Weapon.Sword);
         }
-        if (Input.GetKeyDown("e")) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             GameManager.instance.SelectWeapon(Weapon.Fireball);
         }
 
+        // Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) && currentDashTime >= dashInterval) {
+        	currentDashTime = 0f;
+        	dashDir = movement;
+        	animator.SetTrigger("Dash");
+        }
+
         currentMeleeAttackTime += Time.deltaTime;
+        currentDashTime += Time.deltaTime;
     }
 
     void FixedUpdate() {
     	if (currentMeleeAttackTime < meleeAttackInterval) return;
 
-        if (movement.x != 0 && movement.y != 0) {
+    	if (movement.x != 0 && movement.y != 0) {
             movement.x *= 0.7f;
             movement.y *= 0.7f;
         }
 
-    	rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    	if (currentDashTime < dashTime) {
+    		rb.MovePosition(rb.position + dashDir * dashSpeed * Time.fixedDeltaTime);
+    	} else {
+    		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    	}
     }
 
     void AttackMelee(Vector2 lookDir) {
@@ -68,5 +89,9 @@ public class PlayerMovement : MonoBehaviour {
     	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x, attackPos.y + lookDir.y);
     	// TODO: Check enemies collision
     	print(attackPoint);
+    }
+
+    void Dash() {
+
     }
 }
