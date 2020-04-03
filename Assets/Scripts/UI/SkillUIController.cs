@@ -16,7 +16,7 @@ public class SkillUIController : MonoBehaviour {
         img.color = GameManager.instance.hasUnlockedPower[Power.Freeze] ? unlockedColor : notUnlockedColor;
         txt.gameObject.SetActive(GameManager.instance.hasUnlockedPower[Power.Freeze]);
         
-        float bottomPadding = GameManager.instance.hasUnlockedPower[Power.Fireball] ? 140 : 20;
+        float bottomPadding = GameManager.instance.hasUnlockedPower[Power.Fireball] ? 120 : 20;
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, bottomPadding, rt.sizeDelta.y);
     }
 }
