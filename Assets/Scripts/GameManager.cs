@@ -50,7 +50,7 @@ public class GameManager {
 
 		hasUnlockedPower = new Dictionary<Power, bool>();
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
-			hasUnlockedPower[power] = false;
+			hasUnlockedPower[power] = true;
 		}
 
 		selectedWeapon = Weapon.Sword;
