@@ -86,7 +86,7 @@ public class GameManager {
 	}
 
 	public void ReduceHealth(int damage) {
-		maxHealth = Math.Max(0, health - damage);
+		health = Math.Max(0, health - damage);
 	}
 
 }
