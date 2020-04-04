@@ -15,6 +15,10 @@ public enum Skill {
 	Freeze
 }
 
+public enum Rune {
+	Red, Blue, Yellow
+}
+
 public class GameManager {
 
 	/* Singleton Setup */
@@ -36,7 +40,10 @@ public class GameManager {
 
 	public int numberOfRooms;
 	public bool[] hasClearedRoom;
+	public Power enteredRoom;
+
 	public Dictionary<Power, bool> hasUnlockedPower;
+	public Rune pickedRune;
 
 	public int maxHealth = 100;
 	public int health = 34;
@@ -65,6 +72,7 @@ public class GameManager {
 
 	public void EnterDoor(Power power) {
 		// TODO: Load Scene?
+		enteredRoom = power;
 		if (power == Power.Fireball) {
 			Debug.Log("FIREBALL");
 		} else if (power == Power.Dash) {
@@ -72,6 +80,11 @@ public class GameManager {
 		} else if (power == Power.Freeze) {
 			Debug.Log("FREEZE");
 		}
+	}
+
+	public void PickUpRune(Rune rune) {
+		pickedRune = rune;
+		// TODO: Play some should here?
 	}
 
 }

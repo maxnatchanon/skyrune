@@ -20,7 +20,7 @@ public class PotionEventHandler : MonoBehaviour {
     	float distance = Vector3.Distance(transform.position, player.transform.position);
     	if (distance <= 1.5f) {
     		playerText.SetText("Potion\n(Press C to pick up)", 0.1f);
-    		if (Input.GetKeyDown("c")) {
+    		if (Input.GetKeyDown(KeyCode.C)) {
                 GameManager.instance.numberOfPotions++;
                 Destroy(gameObject);
     		}
