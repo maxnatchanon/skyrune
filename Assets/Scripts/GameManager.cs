@@ -1,23 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Power {
-	Fireball, Dash, Freeze
-}
-
-public enum Weapon {
-	Sword, Fireball
-}
-
-public enum Skill {
-	Freeze
-}
-
-public enum Rune {
-	Red, Blue, Yellow
-}
+public enum Power { Fireball, Dash, Freeze }
+public enum Weapon { Sword, Fireball }
+public enum Skill { Freeze }
+public enum Rune { Red, Blue, Yellow }
 
 public class GameManager {
 
@@ -40,7 +30,7 @@ public class GameManager {
 
 	public int numberOfRooms;
 	public bool[] hasClearedRoom;
-	public Power enteredRoom;
+	public Power? enteredRoom;
 
 	public Dictionary<Power, bool> hasUnlockedPower;
 	public Rune pickedRune;
@@ -50,6 +40,7 @@ public class GameManager {
 	public Weapon selectedWeapon;
 
 	public int numberOfPotions = 0;
+	int potionPower = 25;
 
 	void InitializeGame() {
 		numberOfRooms = 3;
@@ -85,6 +76,17 @@ public class GameManager {
 	public void PickUpRune(Rune rune) {
 		pickedRune = rune;
 		// TODO: Play some should here?
+	}
+
+	public void UsePotion() {
+		if (numberOfPotions > 0) {
+			numberOfPotions -= 1;
+			maxHealth = Math.Min(maxHealth, health + potionPower);
+		}
+	}
+
+	public void ReduceHealth(int damage) {
+		maxHealth = Math.Max(0, health - damage);
 	}
 
 }

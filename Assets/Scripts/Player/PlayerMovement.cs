@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed = 5f;
 	public float dashSpeed = 8f;
 
+    public Transform tf;
 	public Rigidbody2D rb;
 	public Animator animator;
     public Camera cam;
@@ -29,6 +30,30 @@ public class PlayerMovement : MonoBehaviour {
 	Vector2 dashDir;
 
     float fireballForce = 10f;
+
+    float potionInterval = 2f;
+    float currentPotionTime = 2f;
+
+    void Start() {
+        if (GameManager.instance.enteredRoom != null) {
+            if (GameManager.instance.enteredRoom == Power.Fireball) {
+                tf.position = new Vector3(-42.6f, 41.0f, 0f);
+                animator.SetFloat("WalkHorizontal", 1);
+                animator.SetFloat("WalkVertical", 0);
+            } else if (GameManager.instance.enteredRoom == Power.Dash) {
+                tf.position = new Vector3(-28.2f, 48.4f, 0f);
+                animator.SetFloat("WalkHorizontal", -1);
+                animator.SetFloat("WalkVertical", 0);
+            } else if (GameManager.instance.enteredRoom == Power.Freeze) {
+                tf.position = new Vector3(-39.7f, 50.3f, 0f);
+                animator.SetFloat("WalkHorizontal", 1);
+                animator.SetFloat("WalkVertical", 0);
+            }
+            GameManager.instance.enteredRoom = null;
+        } else {
+            tf.position = new Vector3(-36.3f, 42.7f, 0f);
+        }
+    }
 
     void Update() {
     	// Movement
@@ -71,9 +96,16 @@ public class PlayerMovement : MonoBehaviour {
         	animator.SetTrigger("Dash");
         }
 
+        // Potion
+        if (Input.GetKeyDown(KeyCode.Space) && currentPotionTime >= potionInterval) {
+            currentPotionTime = 0;
+            GameManager.instance.UsePotion();
+        }
+
         currentMeleeAttackTime += Time.deltaTime;
         currentShootTime += Time.deltaTime;
         currentDashTime += Time.deltaTime;
+        currentPotionTime += Time.deltaTime;
     }
 
     void FixedUpdate() {
