@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public PlayerHoverText ht;
 
+    public GameObject fireballPrefab;
+
 	Vector2 movement;
 
 	float meleeAttackInterval = 0.4f;
@@ -25,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
 	float dashTime = 0.25f;
 	float currentDashTime = 0.25f;
 	Vector2 dashDir;
+
+    float fireballForce = 10f;
 
     void Update() {
     	// Movement
@@ -104,7 +108,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void AttackFireball(Vector2 lookDir) {
-    	print("FIREBALL");
     	animator.SetFloat("AttackHorizontal", lookDir.x);
         animator.SetFloat("AttackVertical", lookDir.y);
     	animator.SetTrigger("Shoot");
@@ -112,10 +115,8 @@ public class PlayerMovement : MonoBehaviour {
         animator.SetFloat("WalkVertical", lookDir.y);
     	Vector3 attackPos = GetComponent<Transform>().position;
     	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x, attackPos.y + lookDir.y);
-    	// TODO: Generate fireball
-    }
-
-    void Dash() {
-
+        GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
+        Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+        rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
     }
 }
