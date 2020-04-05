@@ -35,23 +35,25 @@ public class PlayerMovement : MonoBehaviour {
     float currentPotionTime = 2f;
 
     void Start() {
-        if (GameManager.instance.enteredRoom != null) {
-            if (GameManager.instance.enteredRoom == Power.Fireball) {
-                tf.position = new Vector3(-42.6f, 41.0f, 0f);
-                animator.SetFloat("WalkHorizontal", 1);
-                animator.SetFloat("WalkVertical", 0);
-            } else if (GameManager.instance.enteredRoom == Power.Dash) {
-                tf.position = new Vector3(-28.2f, 48.4f, 0f);
-                animator.SetFloat("WalkHorizontal", -1);
-                animator.SetFloat("WalkVertical", 0);
-            } else if (GameManager.instance.enteredRoom == Power.Freeze) {
-                tf.position = new Vector3(-39.7f, 50.3f, 0f);
-                animator.SetFloat("WalkHorizontal", 1);
-                animator.SetFloat("WalkVertical", 0);
+        if (GameManager.instance.CurrentScene()=="MainRoom_Scene"){
+            if (GameManager.instance.enteredRoom != null) {
+                if (GameManager.instance.enteredRoom == Power.Fireball) {
+                    tf.position = new Vector3(-42.6f, 41.0f, 0f);
+                    animator.SetFloat("WalkHorizontal", 1);
+                    animator.SetFloat("WalkVertical", 0);
+                } else if (GameManager.instance.enteredRoom == Power.Dash) {
+                    tf.position = new Vector3(-28.2f, 48.4f, 0f);
+                    animator.SetFloat("WalkHorizontal", -1);
+                    animator.SetFloat("WalkVertical", 0);
+                } else if (GameManager.instance.enteredRoom == Power.Freeze) {
+                    tf.position = new Vector3(-39.7f, 50.3f, 0f);
+                    animator.SetFloat("WalkHorizontal", 1);
+                    animator.SetFloat("WalkVertical", 0);
+                }
+                GameManager.instance.enteredRoom = null;
+            } else {
+                tf.position = new Vector3(-36.3f, 42.7f, 0f);
             }
-            GameManager.instance.enteredRoom = null;
-        } else {
-            tf.position = new Vector3(-36.3f, 42.7f, 0f);
         }
     }
 

@@ -89,4 +89,8 @@ public class GameManager {
 		health = Math.Max(0, health - damage);
 	}
 
+	public string CurrentScene(){
+		return SceneManager.GetActiveScene().name;
+	}
+
 }

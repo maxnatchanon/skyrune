@@ -10,18 +10,26 @@ public class Trap_Shooting : MonoBehaviour
     public Animator animator;
     
     public float arrowForce = 20f;
+    public float delayTime = 1f;
+    public float shootInterval;
 
-    float shootInterval = 1f;
-	float currentShootTime = 0.25f;
+	float currentDelayTime = 0f;
+
+    void Start()
+    {
+        animator.SetFloat("Interval",shootInterval);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentShootTime >= shootInterval){
-            Shoot();
-            currentShootTime = 0;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Skull_Delay")){
+            if (currentDelayTime >= delayTime){
+                animator.SetTrigger("Shoot");
+            }else{
+                currentDelayTime += Time.deltaTime;
+            }
         }
-        currentShootTime += Time.deltaTime;
     }
 
     void Shoot()
