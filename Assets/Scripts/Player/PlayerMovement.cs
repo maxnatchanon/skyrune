@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public PlayerHoverText ht;
 
+    public GameObject swordPrefab;
     public GameObject fireballPrefab;
 
 	Vector2 movement;
@@ -136,9 +137,8 @@ public class PlayerMovement : MonoBehaviour {
 
     void CheckMeleeAttackRange(Vector2 lookDir) {
 		Vector3 attackPos = GetComponent<Transform>().position;
-    	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x, attackPos.y + lookDir.y);
-    	// TODO: Check enemies collision
-    	print(attackPoint);
+    	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 0.8f, attackPos.y + lookDir.y * 0.9f);
+        Instantiate(swordPrefab, attackPoint, Quaternion.identity);
     }
 
     void AttackFireball(Vector2 lookDir) {

@@ -349,10 +349,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   dashSpeed: 8
+  tf: {fileID: 0}
   rb: {fileID: 8142766439891363115}
   animator: {fileID: 4855844770438152037}
   cam: {fileID: 0}
   ht: {fileID: 8301514198217712600}
+  swordPrefab: {fileID: 4568294170224927619, guid: 3cc0b2d96f6f74d9188bbd679013aa79,
+    type: 3}
   fireballPrefab: {fileID: 1804696036242268598, guid: ca535968988394ca9a2f1e64d3b03cae,
     type: 3}
 --- !u!114 &8301514198217712600

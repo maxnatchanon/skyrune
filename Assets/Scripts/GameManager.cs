@@ -36,11 +36,14 @@ public class GameManager {
 	public Rune pickedRune;
 
 	public int maxHealth = 100;
-	public int health = 34;
+	public int health = 100;
 	public Weapon selectedWeapon;
 
 	public int numberOfPotions = 0;
 	int potionPower = 25;
+
+	public int swordPower = 20;
+	public int fireballPower = 5;
 
 	void InitializeGame() {
 		numberOfRooms = 3;
