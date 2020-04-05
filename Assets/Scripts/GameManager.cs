@@ -62,20 +62,26 @@ public class GameManager {
 	}
 
 	public void EnterDoor(Power power) {
-		// TODO: Load Scene?
 		enteredRoom = power;
+
+		SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();
 		if (power == Power.Fireball) {
-			Debug.Log("FIREBALL");
+			sceneLoader.LoadScene("Room1_Scene");
 		} else if (power == Power.Dash) {
-			Debug.Log("DASH");
+			sceneLoader.LoadScene("Room2_Scene");
 		} else if (power == Power.Freeze) {
-			Debug.Log("FREEZE");
+			sceneLoader.LoadScene("Room3_Scene");
 		}
+	}
+
+	public void LeaveRoom() {
+		SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();
+		sceneLoader.LoadScene("MainRoom_Scene");
 	}
 
 	public void PickUpRune(Rune rune) {
 		pickedRune = rune;
-		// TODO: Play some should here?
+		// TODO: Play some sound here?
 	}
 
 	public void UsePotion() {

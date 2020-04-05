@@ -12,7 +12,11 @@ public class DoorEventHandler : MonoBehaviour {
 		if (distance <= 2f) {
 			playerText.SetText("Press C to enter", 0.1f);
 			if (Input.GetKeyDown("c")) {
-				GameManager.instance.EnterDoor(roomPower);
+				if (GameManager.instance.enteredRoom == null) {
+					GameManager.instance.EnterDoor(roomPower);
+				} else {
+					GameManager.instance.LeaveRoom();
+				}
 			}
 		}
 	}
