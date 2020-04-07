@@ -90,7 +90,7 @@ public class GameManager {
 	public void UsePotion() {
 		if (numberOfPotions > 0) {
 			numberOfPotions -= 1;
-			maxHealth = Math.Min(maxHealth, health + potionPower);
+			health = Math.Min(maxHealth, health + potionPower);
 		}
 	}
 
