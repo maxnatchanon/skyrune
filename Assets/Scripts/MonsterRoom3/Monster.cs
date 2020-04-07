@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     public float attkRange;
     public float startTimeAtk;
     public float startTimeSkill;
+    public float Health = 60;
     Vector2 pos;
     Vector2 targetPos;
     // Start is called before the first frame update
@@ -25,7 +26,13 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(timeBtwAttack <= 0f){
+
+       attackPlayer();
+       checkHealth();
+    }
+
+    void attackPlayer () {
+      if(timeBtwAttack <= 0f){
           if(Vector2.Distance(transform.position,player.transform.position) <= attkRange){
             GameManager.instance.ReduceHealth(3);
             timeBtwAttack = startTimeAtk;
@@ -33,6 +40,9 @@ public class Monster : MonoBehaviour
        }
        else if(timeBtwSkill > 3f){
           timeBtwAttack -= Time.deltaTime;
+       }
+       else {
+           timeBtwAttack = 2f;
        }
 
        if(timeBtwSkill <= 0f){
@@ -50,4 +60,22 @@ public class Monster : MonoBehaviour
             timeBtwSkill -= Time.deltaTime;
        }
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.gameObject.name == "Sword(Clone)") {
+            Health -= GameManager.instance.swordPower;
+        }
+        else  if (collision.collider.gameObject.name == "Fireball(Clone)") {
+            print("HIT Monster");
+            Health -= GameManager.instance.fireballPower*2;
+        }
+
+     }
+
+     void checkHealth() {
+         if(Health <= 0){
+            Destroy(gameObject);
+         }
+     }
+
 }
