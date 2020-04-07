@@ -33,7 +33,7 @@ public class GameManager {
 	public Power? enteredRoom;
 
 	public Dictionary<Power, bool> hasUnlockedPower;
-	public Rune pickedRune;
+	public Rune? pickedRune;
 
 	public int maxHealth = 100;
 	public int health = 100;
@@ -51,7 +51,7 @@ public class GameManager {
 
 		hasUnlockedPower = new Dictionary<Power, bool>();
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
-			hasUnlockedPower[power] = true;
+			hasUnlockedPower[power] = false;
 		}
 
 		selectedWeapon = Weapon.Sword;
@@ -100,6 +100,17 @@ public class GameManager {
 
 	public string CurrentScene(){
 		return SceneManager.GetActiveScene().name;
+	}
+
+	public void InsertRune() {
+		if (pickedRune == Rune.Red) {
+			hasUnlockedPower[Power.Fireball] = true;
+		} else if (pickedRune == Rune.Blue) {
+			hasUnlockedPower[Power.Freeze] = true;
+		} else if (pickedRune == Rune.Yellow) {
+			hasUnlockedPower[Power.Dash] = true;
+		}
+		pickedRune = null;
 	}
 
 }
