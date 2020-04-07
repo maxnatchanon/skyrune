@@ -18,6 +18,7 @@ namespace Pathfinding {
 		public Transform target;
 		public Transform aiPosition;
 		public Transform firstDirection;
+		public float sawRange = 4.5f;
 		IAstarAI ai;
 
 		void OnEnable () {
@@ -36,7 +37,7 @@ namespace Pathfinding {
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
 			Debug.Log(firstDirection.position);
-			if(Vector3.Distance(aiPosition.position, target.position) > 0f && Vector3.Distance(aiPosition.position, target.position) < 4.5f){
+			if(Vector3.Distance(aiPosition.position, target.position) > 0f && Vector3.Distance(aiPosition.position, target.position) < sawRange){
 				if (target != null && ai != null) ai.destination = target.position;
 			}
 			else if(Vector3.Distance(aiPosition.position, firstDirection.position) > 0f){
