@@ -160,6 +160,7 @@ MonoBehaviour:
   target: {fileID: 1969884284}
   aiPosition: {fileID: 24299242}
   firstDirection: {fileID: 774274290}
+  sawRange: 4.5
 --- !u!114 &24299238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,6 +753,7 @@ MonoBehaviour:
   target: {fileID: 1969884284}
   aiPosition: {fileID: 241221586}
   firstDirection: {fileID: 1599484138}
+  sawRange: 4.5
 --- !u!114 &241221582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12650,6 +12652,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1969884284}
+    - target: {fileID: 3149811064784646670, guid: f2fc411d311c9424aa857fd97742d564,
+        type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1153841337}
     - target: {fileID: 4286588621915154233, guid: f2fc411d311c9424aa857fd97742d564,
         type: 3}
       propertyPath: m_Name
@@ -12935,6 +12942,7 @@ MonoBehaviour:
   target: {fileID: 1969884284}
   aiPosition: {fileID: 1384759152}
   firstDirection: {fileID: 1510153931}
+  sawRange: 4.5
 --- !u!114 &1384759148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29659,6 +29667,7 @@ MonoBehaviour:
   target: {fileID: 1969884284}
   aiPosition: {fileID: 2082532840}
   firstDirection: {fileID: 332696050}
+  sawRange: 4.5
 --- !u!61 &2082532845
 BoxCollider2D:
   m_ObjectHideFlags: 0

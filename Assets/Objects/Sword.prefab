@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4002254369047233261}
   - component: {fileID: 2981627946946071152}
   - component: {fileID: 4951503020779622971}
+  - component: {fileID: 1390915890528622029}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -84,3 +85,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26af17ae3ed84f8cb9b5e12193056c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1390915890528622029
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568294170224927619}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
