@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 	float currentDashTime = 0.25f;
 	Vector2 dashDir;
 
-    float fireballForce = 10f;
+    float fireballForce = 10f * 0.0001f;
 
     float potionInterval = 2f;
     float currentPotionTime = 2f;
