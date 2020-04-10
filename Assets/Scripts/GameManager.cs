@@ -49,7 +49,7 @@ public class GameManager {
 		hasUnlockedPower = new Dictionary<Power, bool>();
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
 			hasClearedRoom[power] = false;
-			hasUnlockedPower[power] = false;
+			hasUnlockedPower[power] = true; // FOR DEBUGGING
 		}
 
 		selectedWeapon = Weapon.Sword;
@@ -113,6 +113,13 @@ public class GameManager {
 
 	public void SetClearedRoom(Power power) {
 		hasClearedRoom[power] = true;
+	}
+
+	public bool hasUnlockedAllPowers() {
+		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
+			if (!hasUnlockedPower[power]) return false;
+		}
+		return true;
 	}
 
 }

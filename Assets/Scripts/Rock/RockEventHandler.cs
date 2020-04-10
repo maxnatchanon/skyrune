@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class RockEventHandler : MonoBehaviour {
 	public GameObject player;
+	public Transform magicCircle;
 
 	Transform playerTransform;
 	PlayerHoverText playerText;
+
+	float circleDelay = 0f;
+	float circleDelayTime = 3f;
+	float circleYScale = 0f;
 
 	void Start() {
 		playerTransform = player.GetComponent<Transform>();
@@ -20,6 +25,17 @@ public class RockEventHandler : MonoBehaviour {
 				playerText.SetText("Press C to insert rune", 0.1f);
 				if (Input.GetKeyDown(KeyCode.C)) {
 					GameManager.instance.InsertRune();
+				}
+			}
+
+			if (GameManager.instance.hasUnlockedAllPowers()) {
+				if (circleDelay < circleDelayTime) {
+					circleDelay += Time.deltaTime;
+				} else if (circleYScale < 1.2f) {
+					circleYScale += Time.deltaTime * 2f;
+					Vector3 scale = magicCircle.localScale;
+					scale.y = circleYScale;
+					magicCircle.localScale = scale;
 				}
 			}
 	}
