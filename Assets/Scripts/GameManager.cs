@@ -28,8 +28,7 @@ public class GameManager {
 
 	/* Game Logic */
 
-	public int numberOfRooms;
-	public bool[] hasClearedRoom;
+	public Dictionary<Power, bool> hasClearedRoom;
 	public Power? enteredRoom;
 
 	public Dictionary<Power, bool> hasUnlockedPower;
@@ -46,11 +45,10 @@ public class GameManager {
 	public int fireballPower = 5;
 
 	void InitializeGame() {
-		numberOfRooms = 3;
-		hasClearedRoom = new bool[] {false, false, false};
-
+		hasClearedRoom = new Dictionary<Power, bool>();
 		hasUnlockedPower = new Dictionary<Power, bool>();
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
+			hasClearedRoom[power] = false;
 			hasUnlockedPower[power] = false;
 		}
 
@@ -111,6 +109,10 @@ public class GameManager {
 			hasUnlockedPower[Power.Dash] = true;
 		}
 		pickedRune = null;
+	}
+
+	public void SetClearedRoom(Power power) {
+		hasClearedRoom[power] = true;
 	}
 
 }
