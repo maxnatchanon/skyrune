@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour {
     float currentPotionTime = 2f;
 
     float currentSlowTime = 0f;
-    float slowTime = 4f;
 
     void Start() {
         if (GameManager.instance.CurrentScene() != "MainRoom_Scene") return;
@@ -165,8 +164,8 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
     }
 
-    public void SetMoveSpeed(float speed){
-        moveSpeed = speed ;
-        currentSlowTime = slowTime;
+    public void SetMoveSpeed(float speedMultiplier, float duration){
+        moveSpeed = moveSpeed*speedMultiplier ;
+        currentSlowTime = duration;
     }
 }

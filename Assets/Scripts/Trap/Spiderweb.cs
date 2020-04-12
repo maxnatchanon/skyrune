@@ -6,6 +6,7 @@ public class Spiderweb : MonoBehaviour
 {
 
     private GameObject player;
+    private bool trapped=false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,13 @@ public class Spiderweb : MonoBehaviour
     void Update()
     {
         if (gameObject.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds)){
-            print("Slow");
+            if (!trapped){
+                trapped = true;
+                player.GetComponent<PlayerMovement>().SetMoveSpeed(0.5f,1f);
+                print("Slow");
+            }
+        }else{
+            trapped = false;
         }
     }
 }
