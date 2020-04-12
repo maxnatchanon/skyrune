@@ -35,6 +35,9 @@ public class PlayerMovement : MonoBehaviour {
     float potionInterval = 2f;
     float currentPotionTime = 2f;
 
+    float currentSlowTime = 0f;
+    float slowTime = 4f;
+
     void Start() {
         if (GameManager.instance.CurrentScene() != "MainRoom_Scene") return;
         
@@ -56,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             tf.position = new Vector3(-36.3f, 42.7f, 0f);
         }
+
     }
 
     void Update() {
@@ -109,6 +113,13 @@ public class PlayerMovement : MonoBehaviour {
         currentShootTime += Time.deltaTime;
         currentDashTime += Time.deltaTime;
         currentPotionTime += Time.deltaTime;
+
+        if(currentSlowTime <= 0){
+            moveSpeed = 5f;
+        }
+        else {
+            currentSlowTime -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate() {
@@ -152,5 +163,10 @@ public class PlayerMovement : MonoBehaviour {
         GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
         rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
+    }
+
+    public void SetMoveSpeed(float speed){
+        moveSpeed = speed ;
+        currentSlowTime = slowTime;
     }
 }
