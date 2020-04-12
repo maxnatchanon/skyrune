@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour
     public float startTimeAtk;
     public float startTimeSkill;
     public float Health = 60;
+    PlayerMovement playerMovement;
     Vector2 pos;
     Vector2 targetPos;
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class Monster : MonoBehaviour
          Debug.Log(pos);
          timeBtwSkill = startTimeSkill;
          timeBtwAttack = startTimeAtk;
+         playerMovement = (PlayerMovement) player.GetComponent(typeof(PlayerMovement));
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class Monster : MonoBehaviour
             skillImage.SetActive(false);
             if(skillImage.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds)){
                 GameManager.instance.ReduceHealth(15);
+                playerMovement.SetMoveSpeed(2f);
             }
             timeBtwSkill = startTimeSkill;
        }
