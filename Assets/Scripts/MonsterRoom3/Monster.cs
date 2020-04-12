@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour
             skillImage.SetActive(false);
             if(skillImage.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds)){
                 GameManager.instance.ReduceHealth(15);
-                playerMovement.SetMoveSpeed(2f);
+                playerMovement.SetMoveSpeed(0.4f,4f);
             }
             timeBtwSkill = startTimeSkill;
        }
