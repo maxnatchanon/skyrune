@@ -43,6 +43,7 @@ public class GameManager {
 
 	public int swordPower = 20;
 	public int fireballPower = 5;
+	public bool[] firePuzzle;
 
 	void InitializeGame() {
 		hasClearedRoom = new Dictionary<Power, bool>();
@@ -53,6 +54,7 @@ public class GameManager {
 		}
 
 		selectedWeapon = Weapon.Sword;
+		firePuzzle = new bool[]{false,false,false,false};
 	}
 
 	public void SelectWeapon(Weapon weapon) {
