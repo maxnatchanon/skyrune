@@ -10,6 +10,6 @@ public class RockRune : MonoBehaviour {
     void Update() {
         redRune.SetActive(GameManager.instance.hasUnlockedPower[Power.Fireball]);
         blueRune.SetActive(GameManager.instance.hasUnlockedPower[Power.Freeze]);
-        yellowRune.SetActive(GameManager.instance.hasUnlockedPower[Power.Dash]);
+        yellowRune.SetActive(GameManager.instance.hasUnlockedPower[Power.Shield]);
     }
 }

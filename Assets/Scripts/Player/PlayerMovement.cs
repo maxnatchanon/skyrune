@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject swordPrefab;
     public GameObject fireballPrefab;
 
+    public GameObject shield;
+
 	Vector2 movement;
 
 	float meleeAttackInterval = 0.4f;
@@ -37,6 +39,14 @@ public class PlayerMovement : MonoBehaviour {
 
     float currentSlowTime = 0f;
 
+    float shieldTime = 8f;
+    float shieldInterval = 38f;
+    float currentShieldTime = 38f;
+
+    public bool isShieldActive {
+        get { return currentShieldTime <= shieldTime; }
+    }
+
     void Start() {
         if (GameManager.instance.CurrentScene() != "MainRoom_Scene") return;
         
@@ -45,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
                 tf.position = new Vector3(-42.6f, 41.0f, 0f);
                 animator.SetFloat("WalkHorizontal", 1);
                 animator.SetFloat("WalkVertical", 0);
-            } else if (GameManager.instance.enteredRoom == Power.Dash) {
+            } else if (GameManager.instance.enteredRoom == Power.Shield) {
                 tf.position = new Vector3(-28.2f, 48.4f, 0f);
                 animator.SetFloat("WalkHorizontal", -1);
                 animator.SetFloat("WalkVertical", 0);
@@ -102,6 +112,12 @@ public class PlayerMovement : MonoBehaviour {
         	animator.SetTrigger("Dash");
         }
 
+        // Shield
+        if (Input.GetKeyDown(KeyCode.R) && currentShieldTime >= shieldInterval && GameManager.instance.hasUnlockedPower[Power.Shield]) {
+            currentShieldTime = 0f;
+        }
+        shield.SetActive(currentShieldTime <= shieldTime);
+
         // Potion
         if (Input.GetKeyDown(KeyCode.Space) && currentPotionTime >= potionInterval) {
             currentPotionTime = 0;
@@ -112,6 +128,7 @@ public class PlayerMovement : MonoBehaviour {
         currentShootTime += Time.deltaTime;
         currentDashTime += Time.deltaTime;
         currentPotionTime += Time.deltaTime;
+        currentShieldTime += Time.deltaTime;
 
         if(currentSlowTime <= 0){
             moveSpeed = 5f;

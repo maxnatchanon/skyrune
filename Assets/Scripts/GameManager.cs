@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Power { Fireball, Dash, Freeze }
+public enum Power { Fireball, Shield, Freeze }
 public enum Weapon { Sword, Fireball }
-public enum Skill { Freeze }
+public enum Skill { Freeze, Shield }
 public enum Rune { Red, Blue, Yellow }
 
 public class GameManager {
@@ -68,7 +68,7 @@ public class GameManager {
 		SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();
 		if (power == Power.Fireball) {
 			sceneLoader.LoadScene("Room1_Scene");
-		} else if (power == Power.Dash) {
+		} else if (power == Power.Shield) {
 			sceneLoader.LoadScene("Room2_Scene");
 		} else if (power == Power.Freeze) {
 			sceneLoader.LoadScene("Room3_Scene");
@@ -93,7 +93,12 @@ public class GameManager {
 	}
 
 	public void ReduceHealth(int damage) {
-		health = Math.Max(0, health - damage);
+		PlayerMovement player = UnityEngine.Object.FindObjectOfType<PlayerMovement>();
+		if (player.isShieldActive) {
+			health = Math.Max(0, health - (damage / 2));
+		} else {
+			health = Math.Max(0, health - damage);
+		}
 	}
 
 	public string CurrentScene(){
@@ -106,7 +111,7 @@ public class GameManager {
 		} else if (pickedRune == Rune.Blue) {
 			hasUnlockedPower[Power.Freeze] = true;
 		} else if (pickedRune == Rune.Yellow) {
-			hasUnlockedPower[Power.Dash] = true;
+			hasUnlockedPower[Power.Shield] = true;
 		}
 		pickedRune = null;
 	}
