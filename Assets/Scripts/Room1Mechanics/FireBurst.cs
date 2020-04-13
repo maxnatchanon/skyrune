@@ -11,12 +11,9 @@ public class FireBurst : MonoBehaviour
     public GameObject Flame2;
     public Animator animator;
     
-    //public float arrowForce = 20f;
-    //public float delayTime = 1f;
-    //public float shootInterval;
-    private int currentCD = 200;
 
-	//float currentDelayTime = 0f;
+    private float currentCD = 1250f;
+
 
     void Start()
     {
@@ -26,9 +23,9 @@ public class FireBurst : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentCD > 0){
+        if (currentCD > 0f){
 	currentCD--;}
-	else{launchFire(); currentCD = 500;}
+	else{launchFire(); currentCD = 1250f;}
     }
 
     void launchFire()
