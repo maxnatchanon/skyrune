@@ -12,7 +12,7 @@ public class FireBurst : MonoBehaviour
     public Animator animator;
     
 
-    private float currentCD = 1250f;
+    private float currentCD = 1f;
 
 
     void Start()
@@ -23,9 +23,10 @@ public class FireBurst : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentCD > 0f){
-	currentCD--;}
-	else{launchFire(); currentCD = 1250f;}
+        if (currentCD < 1000f){
+	currentCD++;}
+	else{currentCD = 0f;}
+	if (currentCD % 450 == 0 && currentCD != 0){launchFire();}
     }
 
     void launchFire()
