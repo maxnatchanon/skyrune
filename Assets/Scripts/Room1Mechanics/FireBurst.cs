@@ -15,6 +15,7 @@ public class FireBurst : MonoBehaviour
     //Cross fire pos will always be at center and simply shows effects.
     public GameObject CrossFire;
     //Crossfire will do nothing except show effects.
+    public GameObject WarnFire;
     
 
     private float currentCD = 1f;
@@ -32,6 +33,7 @@ public class FireBurst : MonoBehaviour
 	currentCD++;}
 	else{currentCD = 0f;}
 	if (currentCD % 450 == 0 && currentCD != 0){launchFire();}
+        if ((currentCD+80) % 2000 == 0 && (currentCD+80) != 0){launchWarnFire();}
         if (currentCD % 2000 == 0 && currentCD != 0){launchCrossFire();}
     }
 
@@ -51,6 +53,15 @@ public class FireBurst : MonoBehaviour
     if ((player.transform.position.x >= -2.5 && player.transform.position.x <= -1.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
         GameManager.instance.ReduceHealth(15);
 }
+    }
+
+    void launchWarnFire()
+    {
+    GameObject warnfire = Instantiate(WarnFire, CrossFirePos.position, CrossFirePos.rotation);
+    Rigidbody2D rb4 = warnfire.GetComponent<Rigidbody2D>();
+    if ((player.transform.position.x >= -2.5 && player.transform.position.x <= -1.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
+        GameManager.instance.ReduceHealth(5);
+}   
     }
 
 
