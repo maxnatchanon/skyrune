@@ -8936,7 +8936,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 1537319983}
   CrossFirePos: {fileID: 1273254629}
-  CrossFire: {fileID: 3001061400439329817, guid: 645f3da00676a37498860d3f3a82c6f0,
+  CrossFire: {fileID: 886168085855101452, guid: 0d514c2422e62aa4492784b86b98fce3,
+    type: 3}
+  WarnFire: {fileID: 5051202811158930734, guid: 544c32e817828e14a90c45b360df4a25,
     type: 3}
 --- !u!1 &1176244431
 GameObject:
