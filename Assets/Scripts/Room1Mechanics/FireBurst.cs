@@ -32,9 +32,9 @@ public class FireBurst : MonoBehaviour
         if (currentCD < 6000f){
 	currentCD++;}
 	else{currentCD = 0f;}
-	if (currentCD % 450 == 0 && currentCD != 0){launchFire();}
-        if ((currentCD+80) % 2000 == 0 && (currentCD+80) != 0){launchWarnFire();}
-        if (currentCD % 2000 == 0 && currentCD != 0){launchCrossFire();}
+	if (currentCD % 450f == 0f && currentCD != 0f){launchFire();}
+        if ((currentCD+80f) % 2000f == 0f && (currentCD+80f) != 0){launchWarnFire();}
+        if (currentCD % 2000f == 0f && currentCD != 0f){launchCrossFire();}
     }
 
     void launchFire()
@@ -50,7 +50,7 @@ public class FireBurst : MonoBehaviour
     {
     GameObject crossfire = Instantiate(CrossFire, CrossFirePos.position, CrossFirePos.rotation);
     Rigidbody2D rb3 = crossfire.GetComponent<Rigidbody2D>();
-    if ((player.transform.position.x >= -2.5 && player.transform.position.x <= -1.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
+    if ((player.transform.position.x >= -4.5 && player.transform.position.x <= -3.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
         GameManager.instance.ReduceHealth(15);
 }
     }
@@ -59,7 +59,7 @@ public class FireBurst : MonoBehaviour
     {
     GameObject warnfire = Instantiate(WarnFire, CrossFirePos.position, CrossFirePos.rotation);
     Rigidbody2D rb4 = warnfire.GetComponent<Rigidbody2D>();
-    if ((player.transform.position.x >= -2.5 && player.transform.position.x <= -1.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
+    if ((player.transform.position.x >= -4.5 && player.transform.position.x <= -3.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
         GameManager.instance.ReduceHealth(5);
 }   
     }
