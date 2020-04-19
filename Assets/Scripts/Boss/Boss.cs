@@ -22,6 +22,9 @@ public class Boss : MonoBehaviour
     float shieldDuration = 5f;
     float currentShieldDuration = 0f;
 
+    float playerCollisionTime = 0f;
+    float playerCollisionInterval = 1.5f;
+
     Vector3[] meteorPos = {
         new Vector3(-40.9f, 40.9f, 0f),
         new Vector3(-31.9f, 41.1f, 0f),
@@ -38,6 +41,7 @@ public class Boss : MonoBehaviour
     {
         nextAttackTime -= Time.deltaTime;
         currentShieldDuration -= Time.deltaTime;
+        playerCollisionTime += Time.deltaTime;
 
         if (nextAttackTime < 0f) {
             nextAttackTime = Random.Range(5f, 10f);
@@ -62,6 +66,15 @@ public class Boss : MonoBehaviour
         else if (collision.collider.gameObject.name == "Player")
         {
             GameManager.instance.ReduceHealth(10);
+            playerCollisionTime = 0f;
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision) {
+        if (collision.collider.gameObject.name == "Player" && playerCollisionTime > playerCollisionInterval)
+        {
+            GameManager.instance.ReduceHealth(10);
+            playerCollisionTime = 0f;
         }
     }
 
@@ -80,7 +93,7 @@ public class Boss : MonoBehaviour
 
     void AttackRandom()
     {
-        BossAttack attack = (BossAttack)Random.Range(1, 1);
+        BossAttack attack = (BossAttack)Random.Range(0, 3);
         switch (attack)
         {
             case BossAttack.Fireball:
@@ -124,6 +137,8 @@ public class Boss : MonoBehaviour
     void AttackSlow()
     {
         animator.SetTrigger("Attack");
+        PlayerMovement player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        player.SetMoveSpeed(0.5f, 8f);
     }
 
 
