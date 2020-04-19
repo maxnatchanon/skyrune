@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
     public float moveSpeed = 3f;
     public float health = 600f;
 
+    public GameObject fireballPrefab;
+
     float nextAttackTime = 3f;
 
     float shieldDuration = 5f;
@@ -66,7 +68,7 @@ public class Boss : MonoBehaviour
 
     void AttackRandom()
     {
-        BossAttack attack = (BossAttack)Random.Range(0, 3);
+        BossAttack attack = (BossAttack)Random.Range(1, 1);
         switch (attack)
         {
             case BossAttack.Fireball:
@@ -94,6 +96,8 @@ public class Boss : MonoBehaviour
     void AttackMeteor()
     {
         animator.SetTrigger("Attack");
+        Vector3 pos = player.position;
+		GameObject.Instantiate(fireballPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
     }
 
     void OpenShield()
