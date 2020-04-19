@@ -132,8 +132,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if(currentSlowTime <= 0){
             moveSpeed = 5f;
-        }
-        else {
+        } else {
             currentSlowTime -= Time.deltaTime;
         }
     }

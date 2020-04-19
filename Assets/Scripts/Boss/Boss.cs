@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
     public float moveSpeed = 3f;
     public float health = 600f;
 
+    public GameObject shield;
+
     public GameObject fireballPrefab;
 
     float nextAttackTime = 3f;
@@ -20,23 +22,29 @@ public class Boss : MonoBehaviour
     float shieldDuration = 5f;
     float currentShieldDuration = 0f;
 
+    Vector3[] meteorPos = {
+        new Vector3(-40.9f, 40.9f, 0f),
+        new Vector3(-31.9f, 41.1f, 0f),
+        new Vector3(-37f, 43.8f, 0f),
+        new Vector3(-30.4f, 48.9f, 0f),
+        new Vector3(-36.4f, 48.9f, 0f),
+        new Vector3(-41.7f, 47.9f, 0f),
+        new Vector3(-39.6f, 45.2f, 0f)
+    };
 
     // Unity Callback
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
         nextAttackTime -= Time.deltaTime;
-        shieldDuration -= Time.deltaTime;
+        currentShieldDuration -= Time.deltaTime;
 
         if (nextAttackTime < 0f) {
             nextAttackTime = Random.Range(5f, 10f);
             AttackRandom();
         }
+
+        shield.SetActive(currentShieldDuration >= 0f);
 
         SetZPosition();
     }
@@ -50,6 +58,10 @@ public class Boss : MonoBehaviour
         else if (collision.collider.gameObject.name == "Sword(Clone)")
         {
             TakeDamage(GameManager.instance.swordPower);
+        }
+        else if (collision.collider.gameObject.name == "Player")
+        {
+            GameManager.instance.ReduceHealth(10);
         }
     }
 
@@ -96,14 +108,17 @@ public class Boss : MonoBehaviour
     void AttackMeteor()
     {
         animator.SetTrigger("Attack");
-        Vector3 pos = player.position;
-		GameObject.Instantiate(fireballPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
+		GameObject.Instantiate(fireballPrefab, new Vector3(player.position.x, player.position.y, 0), Quaternion.identity);
+        for (int i = 0; i < 2; i++)
+        {
+            int idx = Random.Range(0, meteorPos.Length);
+            GameObject.Instantiate(fireballPrefab, meteorPos[idx], Quaternion.identity);
+        }
     }
 
     void OpenShield()
     {
         currentShieldDuration = shieldDuration;
-        // TODO: Activate shield sprite
     }
 
     void AttackSlow()
@@ -114,8 +129,9 @@ public class Boss : MonoBehaviour
 
     // Take Damage
 
-    void TakeDamage(int damage)
+    void TakeDamage(float damage)
     {
-        health -= damage * ((currentShieldDuration > 0f) ? 0.2f : 1f);
+        health -= damage * ((currentShieldDuration >= 0f) ? 0.2f : 1f);
+        print(health);
     }
 }
