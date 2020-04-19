@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed = 5f;
+    float currentMoveSpeed = 5f;
 	public float dashSpeed = 8f;
 
     public Transform tf;
 	public Rigidbody2D rb;
+    public SpriteRenderer sr;
 	public Animator animator;
     public Camera cam;
 
@@ -48,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Start() {
+        currentMoveSpeed = moveSpeed;
+
         if (GameManager.instance.CurrentScene() != "MainRoom_Scene") return;
         
         if (GameManager.instance.enteredRoom != null) {
@@ -130,11 +134,13 @@ public class PlayerMovement : MonoBehaviour {
         currentPotionTime += Time.deltaTime;
         currentShieldTime += Time.deltaTime;
 
-        if(currentSlowTime <= 0){
-            moveSpeed = 5f;
+        if (currentSlowTime <= 0) {
+            currentMoveSpeed = moveSpeed;
         } else {
             currentSlowTime -= Time.deltaTime;
         }
+
+        sr.color = currentSlowTime > 0 ? new Color32(0, 255, 255, 255) : new Color32(255, 255, 255, 255);
     }
 
     void FixedUpdate() {
@@ -148,7 +154,7 @@ public class PlayerMovement : MonoBehaviour {
     	if (currentDashTime < dashTime) {
     		rb.MovePosition(rb.position + dashDir * dashSpeed * Time.fixedDeltaTime);
     	} else {
-    		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    		rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
     	}
     }
 
@@ -181,7 +187,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void SetMoveSpeed(float speedMultiplier, float duration){
-        moveSpeed = moveSpeed*speedMultiplier ;
+        currentMoveSpeed = moveSpeed*speedMultiplier ;
         currentSlowTime = duration;
     }
 }
