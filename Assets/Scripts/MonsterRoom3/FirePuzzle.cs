@@ -10,13 +10,18 @@ public class FirePuzzle : MonoBehaviour
     public Sprite Fire;
     public Sprite Initial;
     public GameObject Path;
+    public GameObject FirePOE;
+    // public float startTimeCount = 5f;
+    // float timeBtwCount;
     Transform player;
 	PlayerHoverText playerText;
-    bool allEnabled = true;
+    int numOfEnabledFire = 0;
+    public bool isCount = false;
 
     void Start() {
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		playerText = GameObject.Find("Player").GetComponent<PlayerHoverText>();
+        GameManager.instance.timeBtwCount = 10f;
 	}
 
     // Update is called once per frame
@@ -31,20 +36,31 @@ public class FirePuzzle : MonoBehaviour
         }
 
         checkKeyPress();
+        print(GameManager.instance.timeBtwCount);
+        if(isCount){
+            if(GameManager.instance.timeBtwCount <= 0f && numOfEnabledFire > 0){
+                for(int i = 0; i < GameManager.instance.firePuzzle.Length; i++)
+                    GameManager.instance.firePuzzle[i] = false;
+            }
+            else if(numOfEnabledFire > 0){
+                GameManager.instance.timeBtwCount -= Time.deltaTime;
+            }
+        }
 
-        allEnabled = true;
+        numOfEnabledFire = 0;
         for(int i = 0; i < GameManager.instance.firePuzzle.Length; i++)
 		{
-		    if (!GameManager.instance.firePuzzle[i]) { allEnabled = false; break;}
+		    if (GameManager.instance.firePuzzle[i]) { numOfEnabledFire += 1;}
 		}
 
 
-        if(allEnabled){
+        if(numOfEnabledFire > 0){
         	//Unlock Path
-        	Path.SetActive(false);
+            FirePOE.transform.localScale = new Vector2((float)(6+numOfEnabledFire),(float)(6+numOfEnabledFire));
+        	FirePOE.SetActive(true);
         }
         else {
-        	Path.SetActive(true);
+        	FirePOE.SetActive(false);
         }
 	}
 
@@ -58,22 +74,16 @@ public class FirePuzzle : MonoBehaviour
     	if (distance <= 1.5f) {
     		playerText.SetText("(Press C to Interact)", 0.1f);
     		if (Input.GetKeyDown(KeyCode.C)) {
-    			if(puzzleId == 0){
-    				GameManager.instance.firePuzzle[2] = !GameManager.instance.firePuzzle[2];
-    			}
-    			else if(puzzleId == 1){
-    				GameManager.instance.firePuzzle[0] = !GameManager.instance.firePuzzle[0];
-    				GameManager.instance.firePuzzle[2] = !GameManager.instance.firePuzzle[2];
-    			}
-    			else if(puzzleId == 2){
-    				GameManager.instance.firePuzzle[1] = !GameManager.instance.firePuzzle[1];
-    			}
-    			else if(puzzleId == 3){
-    				GameManager.instance.firePuzzle[0] = !GameManager.instance.firePuzzle[0];
-    				GameManager.instance.firePuzzle[1] = !GameManager.instance.firePuzzle[1];
-    			}
-
                 GameManager.instance.firePuzzle[puzzleId] = !GameManager.instance.firePuzzle[puzzleId];
+                if(GameManager.instance.firePuzzle[puzzleId]){
+                    if(numOfEnabledFire == 0){
+                         GameManager.instance.timeBtwCount = 10f;
+                    }
+                    else {
+                         GameManager.instance.timeBtwCount += 10f;
+                    }
+                    
+                }
     		}
     	}
 	}

@@ -18,7 +18,7 @@ namespace Pathfinding {
 		public Transform target;
 		public Transform aiPosition;
 		public Transform firstDirection;
-		public float sawRange = 4.5f;
+		public float sawRange = 6f;
 		IAstarAI ai;
 
 		void OnEnable () {

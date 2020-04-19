@@ -45,6 +45,9 @@ public class GameManager {
 	public int fireballPower = 5;
 	public bool[] firePuzzle;
 
+	public float startTimeCount = 5f; //for puzzle room3
+	public float timeBtwCount;
+
 	void InitializeGame() {
 		hasClearedRoom = new Dictionary<Power, bool>();
 		hasUnlockedPower = new Dictionary<Power, bool>();
