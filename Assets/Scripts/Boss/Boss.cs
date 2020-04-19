@@ -9,12 +9,16 @@ enum BossAttack {
 public class Boss : MonoBehaviour
 {
     public Animator animator;
+    public Transform tf;
+    public Rigidbody2D rb;
+
     public Transform player;
     public float moveSpeed = 3f;
-    public float health = 600f;
+    public float health = 700f;
 
     public GameObject shield;
 
+    public GameObject meteorPrefab;
     public GameObject fireballPrefab;
 
     float nextAttackTime = 3f;
@@ -24,6 +28,8 @@ public class Boss : MonoBehaviour
 
     float playerCollisionTime = 0f;
     float playerCollisionInterval = 1.5f;
+
+    float fireballForce = 10f * 0.0001f;
 
     Vector3[] meteorPos = {
         new Vector3(-40.9f, 40.9f, 0f),
@@ -51,6 +57,12 @@ public class Boss : MonoBehaviour
         shield.SetActive(currentShieldDuration >= 0f);
 
         SetZPosition();
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 dir = (player.position - tf.position).normalized;
+        rb.MovePosition(rb.position + new Vector2(dir.x, dir.y) * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -84,7 +96,7 @@ public class Boss : MonoBehaviour
     void SetZPosition()
     {
         Vector3 pos = transform.position;
-        pos.z = (transform.position.y > player.position.y) ? 1 : -1;
+        pos.z = (transform.position.y - 1 > player.position.y) ? 1 : -1;
         transform.position = pos;
     }
 
@@ -93,7 +105,7 @@ public class Boss : MonoBehaviour
 
     void AttackRandom()
     {
-        BossAttack attack = (BossAttack)Random.Range(0, 3);
+        BossAttack attack = (BossAttack)Random.Range(0, 0);
         switch (attack)
         {
             case BossAttack.Fireball:
@@ -115,17 +127,46 @@ public class Boss : MonoBehaviour
 
     void AttackFireball()
     {
+        print("HERE");
         animator.SetTrigger("Fire");
+        Vector3 pos = GetComponent<Transform>().position;
+        Vector3 attackPos = new Vector3(pos.x, pos.y - 1, pos.z);
+        for (float x = -1f; x <= 1f; x += 1f)
+        {
+            for (float y = -1f; y <= 1f; y += 1f)
+            {
+                if (x == 0 && y == 0) continue;
+                Vector2 lookDir = new Vector2(x, y);
+                Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 3, attackPos.y + lookDir.y * 3);
+                GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
+                Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+                fireball.GetComponent<Fireball>().isPlayerFireball = false;
+                rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
+            }
+        }
+        for (float x = -0.75f; x <= 1f; x += 1f)
+        {
+            for (float y = -0.75f; y <= 1f; y += 1f)
+            {
+                if (x == 0 && y == 0) continue;
+                Vector2 lookDir = new Vector2(x, y);
+                Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 3, attackPos.y + lookDir.y * 3);
+                GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
+                Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+                fireball.GetComponent<Fireball>().isPlayerFireball = false;
+                rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
+            }
+        }
     }
 
     void AttackMeteor()
     {
         animator.SetTrigger("Attack");
-		GameObject.Instantiate(fireballPrefab, new Vector3(player.position.x, player.position.y, 0), Quaternion.identity);
+		GameObject.Instantiate(meteorPrefab, new Vector3(player.position.x, player.position.y, 0), Quaternion.identity);
         for (int i = 0; i < 2; i++)
         {
             int idx = Random.Range(0, meteorPos.Length);
-            GameObject.Instantiate(fireballPrefab, meteorPos[idx], Quaternion.identity);
+            GameObject.Instantiate(meteorPrefab, meteorPos[idx], Quaternion.identity);
         }
     }
 
