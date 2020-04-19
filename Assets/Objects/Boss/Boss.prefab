@@ -248,11 +248,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8868908081334325757}
+  tf: {fileID: 8868908081334325745}
+  rb: {fileID: 8868908081334325756}
   player: {fileID: 0}
   moveSpeed: 3
   health: 600
   shield: {fileID: 5580187616805119596}
-  fireballPrefab: {fileID: 3484759467124197920, guid: 8d131196b8f3a4ab48a2239ea149313a,
+  meteorPrefab: {fileID: 3484759467124197920, guid: 8d131196b8f3a4ab48a2239ea149313a,
+    type: 3}
+  fireballPrefab: {fileID: 1804696036242268598, guid: ca535968988394ca9a2f1e64d3b03cae,
     type: 3}
 --- !u!1001 &4291249991806271223
 PrefabInstance:

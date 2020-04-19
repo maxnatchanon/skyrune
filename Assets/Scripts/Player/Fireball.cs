@@ -8,6 +8,8 @@ public class Fireball : MonoBehaviour {
 	private float lifeTime = 2f;
 	private float timer = 0f;
 
+	public bool isPlayerFireball = true;
+
 	void Update() {
 		timer += Time.deltaTime;
 		if (timer >= lifeTime) {
@@ -17,7 +19,14 @@ public class Fireball : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.collider.gameObject.name != "Player") {
+		if (isPlayerFireball && collision.collider.gameObject.name != "Player") {
+			Destroy(GetComponent<Rigidbody2D>());
+			Destroy(GetComponent<BoxCollider2D>());
+			StartCoroutine(Collision());
+		} else if (!isPlayerFireball) {
+			if (collision.collider.gameObject.name == "Player") {
+				GameManager.instance.ReduceHealth(10);
+			}
 			Destroy(GetComponent<Rigidbody2D>());
 			Destroy(GetComponent<BoxCollider2D>());
 			StartCoroutine(Collision());
