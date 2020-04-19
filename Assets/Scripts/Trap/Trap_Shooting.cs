@@ -12,6 +12,7 @@ public class Trap_Shooting : MonoBehaviour
     public float arrowForce = 20f;
     public float delayTime = 1f;
     public float shootInterval;
+    public int type;
 
 	float currentDelayTime = 0f;
 
@@ -24,10 +25,12 @@ public class Trap_Shooting : MonoBehaviour
     void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Skull_Delay")){
-            if (currentDelayTime >= delayTime){
-                animator.SetTrigger("Shoot");
-            }else{
-                currentDelayTime += Time.deltaTime;
+            if (type==1 || (type==2 && GameManager.instance.pickedRune == Rune.Yellow)){
+                if (currentDelayTime >= delayTime){
+                    animator.SetTrigger("Shoot");
+                }else{
+                    currentDelayTime += Time.deltaTime;
+                }
             }
         }
     }
