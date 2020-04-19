@@ -8389,6 +8389,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2072918614}
+    - target: {fileID: 8142766439891363117, guid: c3a2ea111f32e4ba28233beaeb5e3df4,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1333800475
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142766439891363117, guid: c3a2ea111f32e4ba28233beaeb5e3df4,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8142766439891363118, guid: c3a2ea111f32e4ba28233beaeb5e3df4,
         type: 3}
       propertyPath: m_LocalPosition.x
