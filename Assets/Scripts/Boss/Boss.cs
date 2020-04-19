@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     public Transform player;
     public float moveSpeed = 3f;
     public float health = 700f;
+    public float maxHealth = 700f;
 
     public GameObject shield;
 
