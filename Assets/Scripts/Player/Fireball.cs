@@ -19,6 +19,7 @@ public class Fireball : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.collider.gameObject.name != "Player") {
 			Destroy(GetComponent<Rigidbody2D>());
+			Destroy(GetComponent<BoxCollider2D>());
 			StartCoroutine(Collision());
 		}
 	}
