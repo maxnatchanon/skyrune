@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flames : MonoBehaviour
 {
-	private float lifetime = 3f;
+	private float lifetime = 2f;
 	void Awake(){
 	Destroy(this.gameObject, lifetime);	
 }
