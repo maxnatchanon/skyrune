@@ -32,7 +32,7 @@ public class FireBurst : MonoBehaviour
         if (currentCD < 6000f){
 	currentCD++;}
 	else{currentCD = 0f;}
-	if (currentCD % 450f == 0f && currentCD != 0f){launchFire();}
+	if (currentCD % 800f == 0f && currentCD != 0f){launchFire();}
         if ((currentCD+80f) % 2000f == 0f && (currentCD+80f) != 0){launchWarnFire();}
         if (currentCD % 2000f == 0f && currentCD != 0f){launchCrossFire();}
     }
