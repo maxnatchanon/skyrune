@@ -5,7 +5,14 @@ using UnityEngine;
 public class Flames : MonoBehaviour
 {
 	private float lifetime = 2f;
+	//public Sprite sprite1;
+        //public Sprite sprite2;
+	//private float counter = 0;
+        //public SpriteRenderer spriteRenderer;
 	void Awake(){
+	//if (spriteRenderer.sprite == null){
+	//    spriteRenderer.sprite = sprite1;
+//}     
 	Destroy(this.gameObject, lifetime);	
 }
 	void OnCollisionEnter2D(Collision2D collision){
@@ -14,5 +21,16 @@ public class Flames : MonoBehaviour
         }
 
     }
+
+	//void Update(){
+	//counter += Time.deltaTime;
+	//if (counter >= 0.5){
+	//counter = 0;
+	//if (spriteRenderer.sprite == sprite1){
+	//    spriteRenderer.sprite = sprite2;
+	//}
+	//else{spriteRenderer.sprite = sprite1;} 
+//}
+//}
 
 }
