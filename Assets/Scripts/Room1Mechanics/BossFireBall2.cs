@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossFireBall2 : MonoBehaviour {
-	public Animator animator;
+	//public Animator animator;
 
 	private float lifeTime = 2f;
 	private float timer = 0f;
@@ -35,7 +35,7 @@ public class BossFireBall2 : MonoBehaviour {
 	
 
 	IEnumerator Collision() {
-		animator.SetTrigger("Collide");
+		//animator.SetTrigger("Collide");
 		yield return new WaitForSeconds(0.3f);
 		Destroy(gameObject);
 	}
