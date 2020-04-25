@@ -48,6 +48,8 @@ public class GameManager {
 	public float startTimeCount = 5f; //for puzzle room3
 	public float timeBtwCount;
 
+	public bool isPlaying = true;
+
 	void InitializeGame() {
 		hasClearedRoom = new Dictionary<Power, bool>();
 		hasUnlockedPower = new Dictionary<Power, bool>();
@@ -134,5 +136,29 @@ public class GameManager {
 
 	public void activateFreeze(bool active) {
 		Time.timeScale = active ? 0.5f : 1f;
+	}
+
+	public void LoadBossScene() {
+		SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();
+		sceneLoader.LoadScene("BossRoom_Scene");
+	}
+
+	public void EndGame() {
+		Debug.Log("END!");
+		UIController ui = GameObject.Find("UI").GetComponent<UIController>();
+		ui.ShowEndGame(true);
+		isPlaying = false;
+		Time.timeScale = 0f;
+	}
+
+	public void StartNewGame() {
+		InitializeGame();
+		isPlaying = true;
+		Debug.Log("HERE!");
+
+		SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();
+		sceneLoader.LoadScene("MainRoom_Scene");
+		
+		Time.timeScale = 1f;
 	}
 }

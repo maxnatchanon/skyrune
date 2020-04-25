@@ -46,29 +46,41 @@ public class Boss : MonoBehaviour
         new Vector3(-38.8f, 42.8f, 0f)
     };
 
+
     // Unity Callback
 
     void Update()
     {
-        nextAttackTime -= Time.deltaTime;
-        currentShieldDuration -= Time.deltaTime;
-        playerCollisionTime += Time.deltaTime;
+        if (health > 0)
+        {
+            nextAttackTime -= Time.deltaTime;
+            currentShieldDuration -= Time.deltaTime;
+            playerCollisionTime += Time.deltaTime;
 
-        if (nextAttackTime < 0f) {
-            nextAttackTime = Random.Range(3f, 5f);
-            AttackRandom();
+            if (nextAttackTime < 0f) {
+                nextAttackTime = Random.Range(3f, 5f);
+                AttackRandom();
+            }
+
+            shield.SetActive(currentShieldDuration >= 0f);
+
+            SetZPosition();
         }
-
-        shield.SetActive(currentShieldDuration >= 0f);
-
-        SetZPosition();
+        else
+        {
+            shield.SetActive(false);
+            animator.SetTrigger("Death");
+        }
     }
 
     void FixedUpdate()
     {
-        Vector3 dir = (player.position - tf.position).normalized;
-        float speed = moveSpeed * ((health / maxHealth) > 0.5 ? 1f : 1.7f);
-        rb.MovePosition(rb.position + new Vector2(dir.x, dir.y) * Time.fixedDeltaTime * speed);
+        if (health > 0) 
+        {
+            Vector3 dir = (player.position - tf.position).normalized;
+            float speed = moveSpeed * ((health / maxHealth) > 0.5 ? 1f : 1.7f);
+            rb.MovePosition(rb.position + new Vector2(dir.x, dir.y) * Time.fixedDeltaTime * speed);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -188,11 +200,17 @@ public class Boss : MonoBehaviour
         player.SetMoveSpeed(0.7f, 8f);
     }
 
+    void Death() {
+        Destroy(gameObject);
+        GameManager.instance.EndGame();
+    }
+
 
     // Take Damage
 
     void TakeDamage(float damage)
     {
         health -= damage * ((currentShieldDuration >= 0f) ? 0.2f : 1f);
+        health = health < 0 ? 0 : health;
     }
 }

@@ -92,6 +92,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
+        if (!GameManager.instance.isPlaying) {
+            animator.SetFloat("WalkHorizontal", 0);
+            animator.SetFloat("WalkVertical", 0);
+            animator.SetFloat("Speed", 0);
+            return;
+        }
+
     	// Movement
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -168,6 +175,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (!GameManager.instance.isPlaying) return;
     	if (currentMeleeAttackTime < meleeAttackInterval || currentShootTime < shootTime) return;
 
     	if (movement.x != 0 && movement.y != 0) {

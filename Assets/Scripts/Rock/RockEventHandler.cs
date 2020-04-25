@@ -36,6 +36,10 @@ public class RockEventHandler : MonoBehaviour {
 					Vector3 scale = magicCircle.localScale;
 					scale.y = circleYScale;
 					magicCircle.localScale = scale;
+				} else if (circleYScale > 2.5f) {
+					GameManager.instance.LoadBossScene();
+				} else {
+					circleYScale += Time.deltaTime;
 				}
 			}
 	}
