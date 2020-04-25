@@ -132,4 +132,7 @@ public class GameManager {
 		return true;
 	}
 
+	public void activateFreeze(bool active) {
+		Time.timeScale = active ? 0.5f : 1f;
+	}
 }

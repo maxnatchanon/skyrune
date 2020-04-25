@@ -45,8 +45,24 @@ public class PlayerMovement : MonoBehaviour {
     float shieldInterval = 38f;
     float currentShieldTime = 38f;
 
+    float freezeTime = 4f;
+    float freezeInterval = 38f;
+    float currentFreezeTime = 38f;
+
     public bool isShieldActive {
         get { return currentShieldTime <= shieldTime; }
+    }
+
+    public bool isFreezeActive {
+        get { return currentFreezeTime <= freezeTime; }
+    }
+
+    public bool isShieldCoolDown {
+        get { return currentShieldTime <= shieldInterval; }
+    }
+
+    public bool isFreezeCoolDown {
+        get { return currentFreezeTime <= freezeInterval; }
     }
 
     void Start() {
@@ -110,7 +126,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && currentDashTime >= dashInterval) {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && currentDashTime >= (dashInterval * (isFreezeActive ? 0.5f : 1f))) {
         	currentDashTime = 0f;
         	dashDir = movement;
         	animator.SetTrigger("Dash");
@@ -122,14 +138,17 @@ public class PlayerMovement : MonoBehaviour {
         }
         shield.SetActive(currentShieldTime <= shieldTime);
 
+        // Freeze
+        if (Input.GetKeyDown(KeyCode.F) && currentFreezeTime >= freezeInterval && GameManager.instance.hasUnlockedPower[Power.Freeze]) {
+            currentFreezeTime = 0f;
+        }
+        GameManager.instance.activateFreeze(isFreezeActive);
+        animator.SetFloat("SpeedMultiplier", isFreezeActive ? 2f : 1f);
+
         // Potion
         if (Input.GetKeyDown(KeyCode.Space) && currentPotionTime >= potionInterval) {
             currentPotionTime = 0;
             GameManager.instance.UsePotion();
-        }
-
-        if (Input.GetKeyDown(KeyCode.C)) {
-            print(tf.position);
         }
 
         currentMeleeAttackTime += Time.deltaTime;
@@ -137,6 +156,7 @@ public class PlayerMovement : MonoBehaviour {
         currentDashTime += Time.deltaTime;
         currentPotionTime += Time.deltaTime;
         currentShieldTime += Time.deltaTime;
+        currentFreezeTime += Time.deltaTime;
 
         if (currentSlowTime <= 0) {
             currentMoveSpeed = moveSpeed;
@@ -155,10 +175,10 @@ public class PlayerMovement : MonoBehaviour {
             movement.y *= 0.7f;
         }
 
-    	if (currentDashTime < dashTime) {
-    		rb.MovePosition(rb.position + dashDir * dashSpeed * Time.fixedDeltaTime);
+    	if (currentDashTime < (dashTime * (isFreezeActive ? 0.5f : 1f))) {
+    		rb.MovePosition(rb.position + dashDir * dashSpeed * Time.fixedDeltaTime * (isFreezeActive ? 2f : 1f));
     	} else {
-    		rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
+    		rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime * (isFreezeActive ? 2f : 1f));
     	}
     }
 
@@ -187,7 +207,7 @@ public class PlayerMovement : MonoBehaviour {
     	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x, attackPos.y + lookDir.y);
         GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
-        rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
+        rb.AddForce(lookDir * fireballForce * (isFreezeActive ? 2f : 1f), ForceMode2D.Impulse);
     }
 
     public void SetMoveSpeed(float speedMultiplier, float duration){

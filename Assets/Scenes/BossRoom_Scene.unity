@@ -9070,6 +9070,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3783540448995886253, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3783540449397289346, guid: a010559c4ea504abc839c0f4dab6243f,
         type: 3}
       propertyPath: m_Name
@@ -9185,6 +9190,36 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3783540449423854917, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783540450323107733, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783540450804637910, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783540450860319943, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214125965745461305, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416172718538391406, guid: a010559c4ea504abc839c0f4dab6243f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a010559c4ea504abc839c0f4dab6243f, type: 3}
 --- !u!1001 &6910258735378641140
