@@ -32,6 +32,17 @@ public class Trap_Shooting : MonoBehaviour
                     currentDelayTime += Time.deltaTime;
                 }
             }
+
+            if (type == 3) {
+                Boss boss = GameObject.Find("Boss").GetComponent<Boss>();
+                if (boss.health / boss.maxHealth < 0.5) {
+                    if (currentDelayTime >= delayTime) {
+                        animator.SetTrigger("Shoot");
+                    } else {
+                        currentDelayTime += Time.deltaTime;
+                    }
+                }
+            }
         }
     }
 
