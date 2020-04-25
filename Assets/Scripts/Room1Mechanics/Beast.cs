@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireMonster : MonoBehaviour
+public class Beast : MonoBehaviour
 {
     private int HP = 100;
     public Sprite idle1;
     public Sprite idle2;
     public Sprite attacking;
-    public Sprite dissipate;
     public SpriteRenderer spriteRenderer;
     public Transform PlayerPos;
     private float intervals = 0f;
@@ -34,7 +33,7 @@ public class FireMonster : MonoBehaviour
 	}else{
 	    spriteRenderer.sprite = idle2;
 	}
-	if (states >= 6){
+	if (states >= 5){
 		states = 0;
 		spriteRenderer.sprite = attacking;
 		Vector2 playPos = PlayerPos.position;
@@ -69,7 +68,7 @@ public class FireMonster : MonoBehaviour
 
     void checkAlive(){
 	if (HP <= 0){
-		spriteRenderer.sprite = dissipate;
+		
 		Destroy(gameObject);
 }
 }

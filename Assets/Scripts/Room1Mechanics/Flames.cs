@@ -7,13 +7,15 @@ public class Flames : MonoBehaviour
 	private float lifetime = 2f;
 	//public Sprite sprite1;
         //public Sprite sprite2;
-	//private float counter = 0;
+	private float counter = 0f;
         //public SpriteRenderer spriteRenderer;
 	void Awake(){
+	counter = 0f;
+	lifetime = 2f;
 	//if (spriteRenderer.sprite == null){
 	//    spriteRenderer.sprite = sprite1;
 //}     
-	Destroy(this.gameObject, lifetime);	
+	//Destroy(this.gameObject, lifetime);	
 }
 	void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.name == "Player"){
@@ -22,15 +24,11 @@ public class Flames : MonoBehaviour
 
     }
 
-	//void Update(){
-	//counter += Time.deltaTime;
-	//if (counter >= 0.5){
-	//counter = 0;
-	//if (spriteRenderer.sprite == sprite1){
-	//    spriteRenderer.sprite = sprite2;
-	//}
-	//else{spriteRenderer.sprite = sprite1;} 
-//}
-//}
+	void Update(){
+	counter += Time.deltaTime;
+	if (counter >= lifetime){
+		Destroy(gameObject);
+	}
+}
 
 }
