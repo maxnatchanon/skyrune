@@ -16,6 +16,7 @@ public class FireBurst : MonoBehaviour
     public GameObject CrossFire;
     //Crossfire will do nothing except show effects.
     public GameObject WarnFire;
+    private int mode;
     
 
     private float currentCD = 1f;
@@ -23,18 +24,44 @@ public class FireBurst : MonoBehaviour
 
     void Start()
     {
-        //animator.SetFloat("Interval",shootInterval);
+        mode = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentCD < 6000f){
-	currentCD++;}
-	else{currentCD = 0f;}
-	if (currentCD % 800f == 0f && currentCD != 0f){launchFire();}
-        if ((currentCD+80f) % 2000f == 0f && (currentCD+80f) != 0){launchWarnFire();}
-        if (currentCD % 2000f == 0f && currentCD != 0f){launchCrossFire();}
+	currentCD+= Time.deltaTime;
+	if (currentCD >= 4){
+	currentCD = 0;
+	if (mode == 0){
+		mode = 1;
+		launchFire();
+	}
+	else if (mode == 1){
+		mode = 2;
+		launchFire();
+	}
+	else if (mode == 2){
+		mode = 3;
+		launchFire();
+	}
+	else if (mode == 3){
+		mode = 4;
+		launchWarnFire();
+		launchFire();
+	}
+	else{
+		mode = 0;
+		launchFire();
+		launchCrossFire();
+}
+}
+        //if (currentCD < 600f){
+	//currentCD+= Time.deltaTime;}
+	//else{currentCD = 0f;}
+	//if (currentCD % 20f == 0f && currentCD != 0f){launchFire();}
+        //if ((currentCD+1f) % 30f == 0f && (currentCD+1f) != 0f){launchWarnFire();}
+        //if (currentCD % 30f == 0f && currentCD != 0f){launchCrossFire();}
     }
 
     void launchFire()
@@ -61,7 +88,8 @@ public class FireBurst : MonoBehaviour
     Rigidbody2D rb4 = warnfire.GetComponent<Rigidbody2D>();
     if ((player.transform.position.x >= -4.5 && player.transform.position.x <= -3.5) || (player.transform.position.y >= -0.5 && player.transform.position.y <= 0.5)){
         GameManager.instance.ReduceHealth(5);
-}   
+	}   
+	
     }
 
 

@@ -24,11 +24,25 @@ public class BossFireBall : MonoBehaviour
     void Update()
     {
 	Duration+= Time.deltaTime;
-        //if (Duration >= 10){
-           // Destroy(this.gameObject);
-//}
+        if (Duration >= 10){
+            Destroy(this.gameObject);
+}
         //transform.position += dir * speed * Time.deltaTime;
-	transform.position = Vector3.MoveTowards(transform.position ,playerpos.position, speed * Time.deltaTime);
+	//transform.position = Vector3.MoveTowards(transform.position ,playerpos.position, speed * Time.deltaTime);
 	//transform.position += new Vector3(1 * Time.deltaTime, 0, 0);
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+	if (collision.collider.gameObject.name != "Sentinel"){
+	Destroy(GetComponent<Rigidbody2D>());
+	Destroy(GetComponent<BoxCollider2D>());
+	StartCoroutine(Collision());
+	    }	
+	}
+    IEnumerator Collision() {
+		//animator.SetTrigger("Collide");
+		yield return new WaitForSeconds(0.3f);
+		Destroy(gameObject);
+	}
+
 }
