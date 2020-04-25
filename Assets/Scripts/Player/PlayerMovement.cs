@@ -128,6 +128,10 @@ public class PlayerMovement : MonoBehaviour {
             GameManager.instance.UsePotion();
         }
 
+        if (Input.GetKeyDown(KeyCode.C)) {
+            print(tf.position);
+        }
+
         currentMeleeAttackTime += Time.deltaTime;
         currentShootTime += Time.deltaTime;
         currentDashTime += Time.deltaTime;

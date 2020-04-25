@@ -13,7 +13,6 @@ public class Boss : MonoBehaviour
     public Rigidbody2D rb;
 
     public Transform player;
-    public float moveSpeed = 3f;
     public float health = 700f;
     public float maxHealth = 700f;
 
@@ -21,6 +20,8 @@ public class Boss : MonoBehaviour
 
     public GameObject meteorPrefab;
     public GameObject fireballPrefab;
+
+    float moveSpeed = 1.25f;
 
     float nextAttackTime = 3f;
 
@@ -33,13 +34,16 @@ public class Boss : MonoBehaviour
     float fireballForce = 10f * 0.0001f;
 
     Vector3[] meteorPos = {
-        new Vector3(-40.9f, 40.9f, 0f),
-        new Vector3(-31.9f, 41.1f, 0f),
-        new Vector3(-37f, 43.8f, 0f),
-        new Vector3(-30.4f, 48.9f, 0f),
-        new Vector3(-36.4f, 48.9f, 0f),
-        new Vector3(-41.7f, 47.9f, 0f),
-        new Vector3(-39.6f, 45.2f, 0f)
+        new Vector3(-40.4f, 40f, 0f),
+        new Vector3(-45.8f, 42.7f, 0f),
+        new Vector3(-45.7f, 47.7f, 0f),
+        new Vector3(-39.1f, 49.1f, 0f),
+        new Vector3(-33.0f, 51.5f, 0f),
+        new Vector3(-29.1f, 48.4f, 0f),
+        new Vector3(-33.5f, 44.7f, 0f),
+        new Vector3(-30.2f, 40.6f, 0f),
+        new Vector3(-35.9f, 39.6f, 0f),
+        new Vector3(-38.8f, 42.8f, 0f)
     };
 
     // Unity Callback
@@ -51,7 +55,7 @@ public class Boss : MonoBehaviour
         playerCollisionTime += Time.deltaTime;
 
         if (nextAttackTime < 0f) {
-            nextAttackTime = Random.Range(5f, 10f);
+            nextAttackTime = Random.Range(3f, 5f);
             AttackRandom();
         }
 
@@ -63,7 +67,8 @@ public class Boss : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 dir = (player.position - tf.position).normalized;
-        rb.MovePosition(rb.position + new Vector2(dir.x, dir.y) * Time.fixedDeltaTime);
+        float speed = moveSpeed * ((health / maxHealth) > 0.5 ? 1f : 1.7f);
+        rb.MovePosition(rb.position + new Vector2(dir.x, dir.y) * Time.fixedDeltaTime * speed);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -106,7 +111,7 @@ public class Boss : MonoBehaviour
 
     void AttackRandom()
     {
-        BossAttack attack = (BossAttack)Random.Range(0, 0);
+        BossAttack attack = (BossAttack)Random.Range(0, 3);
         switch (attack)
         {
             case BossAttack.Fireball:
@@ -117,6 +122,7 @@ public class Boss : MonoBehaviour
                 break;
             case BossAttack.Shield:
                 OpenShield();
+                AttackRandom();
                 break;
             case BossAttack.Slow:
                 AttackSlow();
@@ -128,7 +134,6 @@ public class Boss : MonoBehaviour
 
     void AttackFireball()
     {
-        print("HERE");
         animator.SetTrigger("Fire");
         Vector3 pos = GetComponent<Transform>().position;
         Vector3 attackPos = new Vector3(pos.x, pos.y - 1, pos.z);
@@ -164,7 +169,7 @@ public class Boss : MonoBehaviour
     {
         animator.SetTrigger("Attack");
 		GameObject.Instantiate(meteorPrefab, new Vector3(player.position.x, player.position.y, 0), Quaternion.identity);
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < meteorPos.Length; i++)
         {
             int idx = Random.Range(0, meteorPos.Length);
             GameObject.Instantiate(meteorPrefab, meteorPos[idx], Quaternion.identity);
@@ -180,7 +185,7 @@ public class Boss : MonoBehaviour
     {
         animator.SetTrigger("Attack");
         PlayerMovement player = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        player.SetMoveSpeed(0.5f, 8f);
+        player.SetMoveSpeed(0.7f, 8f);
     }
 
 
@@ -189,6 +194,5 @@ public class Boss : MonoBehaviour
     void TakeDamage(float damage)
     {
         health -= damage * ((currentShieldDuration >= 0f) ? 0.2f : 1f);
-        print(health);
     }
 }
