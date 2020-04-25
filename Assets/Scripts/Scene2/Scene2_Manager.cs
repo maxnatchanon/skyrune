@@ -37,8 +37,8 @@ public class Scene2_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss.SetActive(true);
-        hpBar.SetActive(true);
+        boss.SetActive(false);
+        hpBar.SetActive(false);
         bunker.SetActive(false);
         SetS(false);
 
@@ -60,10 +60,7 @@ public class Scene2_Manager : MonoBehaviour
             Button_P.SetBool("P_trigger",false);
             Button_B.SetBool("B_trigger",false);
             Button_G.SetBool("G_trigger",false);
-            b1.SetActive(true);
-            b2.SetActive(true);
-            b3.SetActive(true);
-            b4.SetActive(true);
+            SetB(true);
         }
         if (boss.active){
             float health = (float)bossHp / (float)bossMaxHp;
@@ -109,6 +106,13 @@ public class Scene2_Manager : MonoBehaviour
         s2.SetActive(x);
         s3.SetActive(x);
         s4.SetActive(x);
+    }
+
+    void SetB(bool x){
+        b1.GetComponent<Renderer>().enabled = x;
+        b2.GetComponent<Renderer>().enabled = x;
+        b3.GetComponent<Renderer>().enabled = x;
+        b4.GetComponent<Renderer>().enabled = x;
     }
 
     public void TurnOnButton(){
