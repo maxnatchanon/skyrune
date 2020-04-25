@@ -33,7 +33,7 @@ public class Trap_Shooting : MonoBehaviour
                 }
             }
 
-            if (type == 3) {
+            if (type == 3 && GameManager.instance.isPlaying) {
                 Boss boss = GameObject.Find("Boss").GetComponent<Boss>();
                 if (boss.health / boss.maxHealth < 0.5) {
                     if (currentDelayTime >= delayTime) {
