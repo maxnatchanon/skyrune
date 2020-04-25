@@ -36,7 +36,7 @@ namespace Pathfinding {
 
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
-			Debug.Log(firstDirection.position);
+			//Debug.Log(firstDirection.position);
 			if(Vector3.Distance(aiPosition.position, target.position) > 0f && Vector3.Distance(aiPosition.position, target.position) < sawRange){
 				if (target != null && ai != null) ai.destination = target.position;
 			}
