@@ -19,7 +19,6 @@ public class Monster : MonoBehaviour
   void Start()
   {
     pos = transform.position;
-    Debug.Log(pos);
     timeBtwSkill = startTimeSkill;
     timeBtwAttack = startTimeAtk;
     playerMovement = (PlayerMovement)player.GetComponent(typeof(PlayerMovement));
