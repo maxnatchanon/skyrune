@@ -6,7 +6,6 @@ public class Ball_move : MonoBehaviour
 {
     public float degree;
 
-    private float moveInterval=0.5f;
     private float currentMoveTime=0f;
 
     private float radius = 1.2f;
