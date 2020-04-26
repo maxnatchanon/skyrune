@@ -30,6 +30,8 @@ public class Scene2_Manager : MonoBehaviour
     public GameObject b3;
     public GameObject b4;
 
+    public GameObject blue;
+
     private float bossMaxHp;
     private float bossHp;
     private GameObject RunePickUp;
@@ -40,6 +42,7 @@ public class Scene2_Manager : MonoBehaviour
         boss.SetActive(false);
         hpBar.SetActive(false);
         bunker.SetActive(false);
+        blue.SetActive(false);
         SetS(false);
 
         RunePickUp = GameObject.Find("/YellowRunePickup");
@@ -52,17 +55,18 @@ public class Scene2_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!boss.active &&  GameManager.instance.pickedRune == Rune.Yellow && player.transform.position.x > -15.0f && bossHp==bossMaxHp){
+        if (!boss.activeSelf &&  GameManager.instance.pickedRune == Rune.Yellow && player.transform.position.x > -15.0f && player.transform.position.y < -1.0f && bossHp==bossMaxHp){
             boss.SetActive(true);
             hpBar.SetActive(true);
             bunker.SetActive(true);
+            blue.SetActive(true);
             Button_R.SetBool("R_trigger",false);
             Button_P.SetBool("P_trigger",false);
             Button_B.SetBool("B_trigger",false);
             Button_G.SetBool("G_trigger",false);
             SetB(true);
         }
-        if (boss.active){
+        if (boss.activeSelf){
             float health = (float)bossHp / (float)bossMaxHp;
             bar.transform.localScale = new Vector3(health, 1f, 1f);
         }
@@ -86,7 +90,7 @@ public class Scene2_Manager : MonoBehaviour
             SetS(false,false,false,true);
             b4.GetComponent<Renderer>().enabled = false;
         }
-        if (boss.active){
+        if (boss.activeSelf){
             bossHp = boss.GetComponent<MiniBoss_2>().bossHp2;
             bossMaxHp = boss.GetComponent<MiniBoss_2>().bossMaxHp2;
             float health = (float)bossHp / (float)bossMaxHp;

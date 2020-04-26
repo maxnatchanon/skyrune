@@ -32,7 +32,7 @@ public class Mon_2 : MonoBehaviour
         }else if (collision.gameObject.name == "Sword(Clone)"){
             hp = hp - GameManager.instance.swordPower;
         }else if (collision.gameObject.name == "Player"){
-            GameManager.instance.ReduceHealth(10);
+            GameManager.instance.ReduceHealth(5);
         }
         if (hp <= 0){
             Destroy(gameObject);
