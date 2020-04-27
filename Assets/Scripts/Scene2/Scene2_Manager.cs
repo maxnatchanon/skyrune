@@ -31,6 +31,8 @@ public class Scene2_Manager : MonoBehaviour
     public GameObject b4;
 
     public GameObject blue;
+    public GameObject red;
+    public GameObject purple;
 
     private float bossMaxHp;
     private float bossHp;
@@ -42,6 +44,8 @@ public class Scene2_Manager : MonoBehaviour
         boss.SetActive(false);
         hpBar.SetActive(false);
         bunker.SetActive(false);
+        red.SetActive(false);
+        purple.SetActive(false);
         blue.SetActive(false);
         SetS(false);
 
@@ -59,7 +63,8 @@ public class Scene2_Manager : MonoBehaviour
             boss.SetActive(true);
             hpBar.SetActive(true);
             bunker.SetActive(true);
-            blue.SetActive(true);
+            //blue.SetActive(true);
+            //red.SetActive(true);
             Button_R.SetBool("R_trigger",false);
             Button_P.SetBool("P_trigger",false);
             Button_B.SetBool("B_trigger",false);
