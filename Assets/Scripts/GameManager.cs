@@ -41,8 +41,10 @@ public class GameManager {
 	public int numberOfPotions = 0;
 	int potionPower = 25;
 
+	// Currently at 10x for testing
 	public int swordPower = 200;
 	public int fireballPower = 50;
+
 	public bool[] firePuzzle;
 
 	public float startTimeCount = 5f; //for puzzle room3
@@ -51,11 +53,14 @@ public class GameManager {
 	public bool isPlaying = true;
 
 	void InitializeGame() {
+		numberOfPotions = 7;
+		health = maxHealth;
+		pickedRune = null;
 		hasClearedRoom = new Dictionary<Power, bool>();
 		hasUnlockedPower = new Dictionary<Power, bool>();
 		foreach (Power power in (Power[]) System.Enum.GetValues(typeof(Power))) {
 			hasClearedRoom[power] = false;
-			hasUnlockedPower[power] = true; // FOR DEBUGGING
+			hasUnlockedPower[power] = false;
 		}
 
 		selectedWeapon = Weapon.Sword;
@@ -66,7 +71,6 @@ public class GameManager {
 		if (weapon == selectedWeapon) return;
 		if (weapon == Weapon.Fireball && !hasUnlockedPower[Power.Fireball]) return;
 		selectedWeapon = weapon;
-		// TODO: Play some sound here?
 	}
 
 	public void EnterDoor(Power power) {
@@ -89,7 +93,6 @@ public class GameManager {
 
 	public void PickUpRune(Rune rune) {
 		pickedRune = rune;
-		// TODO: Play some sound here?
 	}
 
 	public void UsePotion() {
@@ -105,6 +108,14 @@ public class GameManager {
 			health = Math.Max(0, health - (damage / 2));
 		} else {
 			health = Math.Max(0, health - damage);
+		}
+		if (health <= 0) {
+			Debug.Log("DEATH!");
+			UIController ui = GameObject.Find("UI").GetComponent<UIController>();
+			ui.SetEndgameTextForGameOver();
+			ui.ShowEndGame(true);
+			isPlaying = false;
+			Time.timeScale = 0f;
 		}
 	}
 
@@ -146,6 +157,7 @@ public class GameManager {
 	public void EndGame() {
 		Debug.Log("END!");
 		UIController ui = GameObject.Find("UI").GetComponent<UIController>();
+		ui.SetEndgameTextForVictory();
 		ui.ShowEndGame(true);
 		isPlaying = false;
 		Time.timeScale = 0f;

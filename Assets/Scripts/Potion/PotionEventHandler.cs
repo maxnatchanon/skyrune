@@ -12,6 +12,8 @@ public class PotionEventHandler : MonoBehaviour {
 	}
 
     void Update() {
+			if (!GameManager.instance.isPlaying) return;
+			
     	Vector3 tmp = transform.position;
     	float potionBottomY = transform.position.y - GetComponent<Renderer>().bounds.size.y / 2;
     	tmp.z = (player.transform.position.y <= potionBottomY + 0.7) ? 1 : -1;

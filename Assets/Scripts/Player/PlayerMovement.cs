@@ -93,9 +93,13 @@ public class PlayerMovement : MonoBehaviour {
 
     void Update() {
         if (!GameManager.instance.isPlaying) {
-            animator.SetFloat("WalkHorizontal", 0);
-            animator.SetFloat("WalkVertical", 0);
-            animator.SetFloat("Speed", 0);
+            if (GameManager.instance.health > 0) {
+                animator.SetFloat("WalkHorizontal", 0);
+                animator.SetFloat("WalkVertical", 0);
+                animator.SetFloat("Speed", 0);
+            } else {
+                gameObject.SetActive(false);
+            }
             return;
         }
 
