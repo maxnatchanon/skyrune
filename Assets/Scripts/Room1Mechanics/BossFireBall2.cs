@@ -18,15 +18,15 @@ public class BossFireBall2 : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		 
-			print(collision.collider.gameObject.name);
+			// print(collision.collider.gameObject.name);
 			if (collision.collider.gameObject.name != "Sentinel"){
-			print(collision.collider.gameObject.name);
-			print("TEST TEST 2");
+			// print(collision.collider.gameObject.name);
+			// print("TEST TEST 2");
 
 			if (collision.collider.gameObject.name == "Player") {
 				GameManager.instance.ReduceHealth(10);
 			}
-			print(collision.collider.gameObject.name);
+			// print(collision.collider.gameObject.name);
 			Destroy(GetComponent<Rigidbody2D>());
 			Destroy(GetComponent<BoxCollider2D>());
 			StartCoroutine(Collision());
