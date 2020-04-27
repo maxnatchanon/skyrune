@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 	public Image fill;
 	public GameObject[] inGameUI;
 	public GameObject[] endGameUI;
+	public Text endgameText;
 
 	PlayerMovement player;
 	Color32 freezeColor = new Color32(0, 120, 255, 40);
@@ -41,5 +42,15 @@ public class UIController : MonoBehaviour
 	public void StartNewGame()
 	{
 		GameManager.instance.StartNewGame();
+	}
+
+	public void SetEndgameTextForGameOver()
+	{
+		endgameText.text = "GAME OVER";
+	}
+
+	public void SetEndgameTextForVictory()
+	{
+		endgameText.text = "THANKS FOR PLAYING!";
 	}
 }

@@ -17,13 +17,16 @@ public class DoorEventHandler : MonoBehaviour {
 		if (GameManager.instance.hasClearedRoom[roomPower]) return;
 		
 		float distance = Vector3.Distance(transform.position, player.transform.position);
-		if (distance <= 2f) {
+		if (distance <= 2f 
+				&& (GameManager.instance.pickedRune == null && GameManager.instance.enteredRoom == null)
+				&& (GameManager.instance.pickedRune != null && GameManager.instance.enteredRoom != null)) {
 			playerText.SetText("Press C to enter", 0.1f);
 			if (Input.GetKeyDown("c")) {
 				if (GameManager.instance.enteredRoom == null) {
 					GameManager.instance.EnterDoor(roomPower);
 				} else {
 					GameManager.instance.LeaveRoom();
+					GameManager.instance.SetClearedRoom(roomPower);
 				}
 			}
 		}
