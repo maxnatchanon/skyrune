@@ -11,6 +11,7 @@ public class FireMonster : MonoBehaviour
     public Sprite dissipate;
     public SpriteRenderer spriteRenderer;
     public Transform PlayerPos;
+    public SentinelScript theSentinel;
     private float intervals = 0f;
     private int states = 0;
     // Start is called before the first frame update
@@ -70,6 +71,7 @@ public class FireMonster : MonoBehaviour
     void checkAlive(){
 	if (HP <= 0){
 		spriteRenderer.sprite = dissipate;
+		theSentinel.addStun(10);
 		Destroy(gameObject);
 }
 }
