@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SentinelScript : MonoBehaviour
 {
-    private int HP = 200;
+    private int HP = 250;
     //Modify line 89 everytime this HP value is changed.
     private float stunned = 0;
     private float counter;
@@ -21,6 +21,7 @@ public class SentinelScript : MonoBehaviour
     public GameObject monsterB;
     public GameObject monsterC;
     public GameObject monsterD;
+    public RunePickup TheRune;
     private float intervals;
     private int stunnedyet;
     //Boss will be stunned at half HP.
@@ -102,6 +103,7 @@ public class SentinelScript : MonoBehaviour
         if (HP <= 0){
 		Explosion();
 		spriteRenderer.sprite = broken;
+		TheRune.Unlock();
         //    Destroy(gameObject);
         }
     }
@@ -112,6 +114,10 @@ public class SentinelScript : MonoBehaviour
 	 GameObject spark = Instantiate(Spark, RandomPos, Quaternion.identity);
         //Rigidbody2D srb = sfireball.GetComponent<Rigidbody2D>();
 }
+}
+
+	public void addStun(float stunTime){
+		stunned += stunTime;
 }
 
 }
