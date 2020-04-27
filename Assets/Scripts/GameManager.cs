@@ -41,8 +41,8 @@ public class GameManager {
 	public int numberOfPotions = 0;
 	int potionPower = 25;
 
-	public int swordPower = 20;
-	public int fireballPower = 5;
+	public int swordPower = 200;
+	public int fireballPower = 50;
 	public bool[] firePuzzle;
 
 	public float startTimeCount = 5f; //for puzzle room3

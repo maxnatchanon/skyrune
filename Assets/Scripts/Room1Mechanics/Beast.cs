@@ -37,11 +37,11 @@ public class Beast : MonoBehaviour
 		states = 0;
 		spriteRenderer.sprite = attacking;
 		Vector2 playPos = PlayerPos.position;
-		print("TESTING");
-		print(playPos.x);
-		print(playPos.y);
-		print(transform.position.x);
-		print(transform.position.y);
+		// print("TESTING");
+		// print(playPos.x);
+		// print(playPos.y);
+		// print(transform.position.x);
+		// print(transform.position.y);
 		if (((playPos.x - transform.position.x <= 1.5) && (playPos.x - transform.position.x >= -1.5))&&((playPos.y - transform.position.y <= 1.5) && (playPos.y - transform.position.y >= -1.5))){
 			GameManager.instance.ReduceHealth(5);
 		}

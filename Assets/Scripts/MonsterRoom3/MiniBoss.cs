@@ -20,7 +20,7 @@ public class MiniBoss : MonoBehaviour
   public float startTimeSkill;
   public float startTimeSkillPlayer = 3f;
   public float startTimeTeleport = 6f;
-  float startTimeShield = 6f;
+  // float startTimeShield = 6f;
   public float Health = 10;
   PlayerMovement playerMovement;
 
