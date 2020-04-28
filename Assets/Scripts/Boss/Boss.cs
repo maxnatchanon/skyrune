@@ -20,10 +20,12 @@ public class Boss : MonoBehaviour
 
     public GameObject meteorPrefab;
     public GameObject fireballPrefab;
+    public GameObject redBulletPrefab;
+    public GameObject potionPrefab;
 
     float moveSpeed = 1.25f;
 
-    float nextAttackTime = 2.5f;
+    float nextAttackTime = 2f;
 
     float shieldDuration = 5f;
     float currentShieldDuration = 0f;
@@ -31,7 +33,12 @@ public class Boss : MonoBehaviour
     float playerCollisionTime = 0f;
     float playerCollisionInterval = 1.5f;
 
-    float fireballForce = 10f * 0.0001f;
+    float fireballForce = 8f * 0.0001f;
+
+    float fireBulletInterval = 0.5f;
+    float fireBulletTime = 0.5f;
+
+    bool potionSpawned = false;
 
     Vector3[] meteorPos = {
         new Vector3(-40.4f, 40f, 0f),
@@ -56,10 +63,23 @@ public class Boss : MonoBehaviour
             nextAttackTime -= Time.deltaTime;
             currentShieldDuration -= Time.deltaTime;
             playerCollisionTime += Time.deltaTime;
+            fireBulletTime += Time.deltaTime;
 
             if (nextAttackTime < 0f) {
                 nextAttackTime = Random.Range(3f, 5f);
                 AttackRandom();
+            }
+
+            if (health / maxHealth < 0.5 && fireBulletTime >= fireBulletInterval) {
+                AttackBullet();
+                fireBulletTime = 0f;
+            }
+
+            if (health / maxHealth < 0.9 && !potionSpawned) {
+                potionSpawned = true;
+                GameObject.Instantiate(potionPrefab, meteorPos[0], Quaternion.identity);
+                GameObject.Instantiate(potionPrefab, meteorPos[4], Quaternion.identity);
+                GameObject.Instantiate(potionPrefab, meteorPos[6], Quaternion.identity);
             }
 
             shield.SetActive(currentShieldDuration >= 0f);
@@ -200,6 +220,16 @@ public class Boss : MonoBehaviour
         animator.SetTrigger("Attack");
         PlayerMovement player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         player.SetMoveSpeed(0.7f, 8f);
+    }
+
+    void AttackBullet()
+    {
+        Vector3 dir = (player.position - tf.position).normalized;
+        Vector2 dir2 = new Vector2(dir.x, dir.y);
+        Vector3 pos = new Vector3(tf.position.x + (dir.x * 2), tf.position.y + (dir.y * 2), 0);
+        GameObject bullet = GameObject.Instantiate(redBulletPrefab, pos, Quaternion.identity);
+        R_bullet b = bullet.GetComponent<R_bullet>();
+        b.SetMoveDirection(dir2);
     }
 
     void Death() {

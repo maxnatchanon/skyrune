@@ -16,7 +16,9 @@ public class R_bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scenemanager = GameObject.Find("/Scene2_Manager");
+        if (GameManager.instance.CurrentScene() == "Room2_Scene") {
+            scenemanager = GameObject.Find("/Scene2_Manager");
+        }
     }
 
     // Update is called once per frame
@@ -27,7 +29,6 @@ public class R_bullet : MonoBehaviour
             Destroy(gameObject);
         }
         currentShootTime+=Time.deltaTime;
-        print(transform.position);
     }
 
     public void SetMoveDirection(Vector2 dir){
@@ -37,10 +38,17 @@ public class R_bullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision){
         string name = collision.gameObject.name;
         if (name == "Player"){
-            if (!scenemanager.GetComponent<Scene2_Manager>().s1.activeSelf){
+            if (GameManager.instance.CurrentScene() == "Room2_Scene") {
+                if (!scenemanager.GetComponent<Scene2_Manager>().s1.activeSelf){
+                    GameManager.instance.ReduceHealth(5);
+                }
+            } else {
                 GameManager.instance.ReduceHealth(5);
+                Destroy(gameObject);
             }
         }
-        Destroy(gameObject);
+        if (GameManager.instance.CurrentScene() == "Room2_Scene") {
+            Destroy(gameObject);
+        }
     }
 }
