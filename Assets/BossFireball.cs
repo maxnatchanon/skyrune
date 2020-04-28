@@ -16,4 +16,10 @@ public class BossFireball : MonoBehaviour
     	}
     	Destroy(parent);
     }
+
+    void ShakeCamera()
+    {
+        BossCameraControl cam = GameObject.Find("CameraControl").GetComponent<BossCameraControl>();
+        cam.ShakeCamera();
+    }
 }
