@@ -32,6 +32,8 @@ public class RockEventHandler : MonoBehaviour {
 				if (circleDelay < circleDelayTime) {
 					circleDelay += Time.deltaTime;
 				} else if (circleYScale < 1.2f) {
+					BossCameraControl cam = GameObject.Find("CameraControl").GetComponent<BossCameraControl>();
+					cam.ShakeCamera();
 					circleYScale += Time.deltaTime * 2f;
 					Vector3 scale = magicCircle.localScale;
 					scale.y = circleYScale;
