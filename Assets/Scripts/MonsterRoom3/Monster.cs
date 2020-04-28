@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
   public float attkRange;
   public float startTimeAtk;
   public float startTimeSkill;
-  public float Health = 60;
+  public float Health = 100;
   PlayerMovement playerMovement;
   Vector2 pos;
   Vector2 targetPos;
@@ -80,8 +80,7 @@ public class Monster : MonoBehaviour
     }
     else if (collision.collider.gameObject.name == "Fireball(Clone)")
     {
-      print("HIT Monster");
-      Health -= GameManager.instance.fireballPower * 2;
+      Health -= GameManager.instance.fireballPower;
     }
 
   }

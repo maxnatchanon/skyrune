@@ -21,7 +21,7 @@ public class MiniBoss : MonoBehaviour
   public float startTimeSkillPlayer = 3f;
   public float startTimeTeleport = 6f;
   // float startTimeShield = 6f;
-  public float Health = 10;
+  public float Health = 400;
   PlayerMovement playerMovement;
 
   Vector2 pos;
@@ -47,7 +47,7 @@ public class MiniBoss : MonoBehaviour
     AttackPlayer();
     SkillPlayer();
     CheckHealth();
-    if (Health <= 400)
+    if (Health <= 200)
     {
       shieldMachanic();
     }
