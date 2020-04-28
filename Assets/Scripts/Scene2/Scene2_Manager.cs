@@ -61,7 +61,7 @@ public class Scene2_Manager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (!boss.activeSelf && GameManager.instance.pickedRune == Rune.Yellow && player.transform.position.x > -15.0f && player.transform.position.y < -1.0f && bossHp == bossMaxHp)
+    if (!boss.activeSelf && GameManager.instance.pickedRune == Rune.Yellow && player.transform.position.x > -17.0f && player.transform.position.y < 5.0f && bossHp == bossMaxHp)
     {
       boss.SetActive(true);
       hpBar.SetActive(true);

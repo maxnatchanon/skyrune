@@ -37,30 +37,37 @@ public class MiniBoss_2 : MonoBehaviour
             switch (state){
                 case 1:
                     ActiveColor(GetRandomColor(1));
+                    trigger = false;
                     break;
                 case 2:
                     ActiveColor(GetRandomColor(1));
+                    trigger = false;
                     break;
                 case 3:
                     ActiveColor(GetRandomColor(2));
+                    trigger = false;
                     break;
                 case 4:
                     ActiveColor(GetRandomColor(2));
+                    trigger = false;
                     break;
                 case 5:
                     ActiveColor(GetRandomColor(3));
+                    trigger = false;
                     break;
                 case 6:
                     ActiveColor(GetRandomColor(3));
+                    trigger = false;
                     break;
                 case 7:
                     ActiveColor(GetRandomColor(4));
+                    trigger = false;
                     break;
                 case 8:
                     ActiveColor(GetRandomColor(4));
+                    trigger = false;
                     break;
             }
-            trigger = false;
         }
     }
 
@@ -92,6 +99,7 @@ public class MiniBoss_2 : MonoBehaviour
                 TurnOnBall();
                 trigger = true;
                 scenemanager.GetComponent<Scene2_Manager>().TurnOnButton();
+                GameObject potion = Instantiate(potion_prefab, GetRandomPotion().position , Quaternion.identity);
             }else if (bossHp2 <= 200 && state==4){
                 state = 5;
                 TurnOnBall();
@@ -103,6 +111,7 @@ public class MiniBoss_2 : MonoBehaviour
                 TurnOnBall();
                 trigger = true;
                 scenemanager.GetComponent<Scene2_Manager>().TurnOnButton();
+                GameObject potion = Instantiate(potion_prefab, GetRandomPotion().position , Quaternion.identity);
             }else if (bossHp2 <= 100 && state==6){
                 state = 7;
                 TurnOnBall();
@@ -116,6 +125,7 @@ public class MiniBoss_2 : MonoBehaviour
                 scenemanager.GetComponent<Scene2_Manager>().TurnOnButton();
             }else if (bossHp2 <= 0){
                 scenemanager.GetComponent<Scene2_Manager>().Clear();
+                GameObject potion = Instantiate(potion_prefab, GetRandomPotion().position , Quaternion.identity);
             }
         }
     }
