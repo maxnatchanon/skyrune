@@ -6,6 +6,8 @@ public class MiniBoss : MonoBehaviour
 {
   public GameObject player;
   public GameObject skillImage;
+  public GameObject beam1;
+  public GameObject beam2;
   public GameObject skillAtPlayer;
   public GameObject poeFireSkill;
   public GameObject rune;
@@ -23,7 +25,7 @@ public class MiniBoss : MonoBehaviour
   // float startTimeShield = 6f;
   public float Health = 400;
   PlayerMovement playerMovement;
-
+  bool shouldRandom = true;
   Vector2 pos;
   Vector2 targetPos;
   public bool isShield = false;
@@ -58,7 +60,10 @@ public class MiniBoss : MonoBehaviour
     }
     if (Health <= 200)
     {
-      stage3();
+      if (!isShield)
+      {
+        stage3();
+      }
     }
     PoeFireTrap();
 
@@ -135,17 +140,41 @@ public class MiniBoss : MonoBehaviour
   {
     if (timeBtwSkill <= 0f)
     {
-      skillImage.SetActive(false);
-      if (skillImage.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds))
+      shouldRandom = true;
+      if (skillImage.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds) && skillImage.activeSelf)
+      {
+        GameManager.instance.ReduceHealth(15);
+        playerMovement.SetMoveSpeed(0.4f, 4f);
+      }
+      else if (beam1.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds) && beam1.activeSelf)
+      {
+        GameManager.instance.ReduceHealth(15);
+        playerMovement.SetMoveSpeed(0.4f, 4f);
+      }
+      else if (beam2.GetComponent<Renderer>().bounds.Intersects(player.GetComponent<Renderer>().bounds) && beam2.activeSelf)
       {
         GameManager.instance.ReduceHealth(15);
         playerMovement.SetMoveSpeed(0.4f, 4f);
       }
       timeBtwSkill = startTimeSkill;
+      skillImage.SetActive(false);
+      beam1.SetActive(false);
+      beam2.SetActive(false);
     }
     else if (timeBtwSkill <= 3f)
     {
-      skillImage.SetActive(true);
+      beam1.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1 - timeBtwSkill / 3);
+      beam2.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1 - timeBtwSkill / 3);
+      if (shouldRandom)
+      {
+        int randomSkill = Random.Range(1, 4);
+        if (randomSkill == 1)
+          skillImage.SetActive(true);
+        else if (randomSkill == 2)
+          beam1.SetActive(true);
+        else beam2.SetActive(true);
+        shouldRandom = false;
+      }
       timeBtwSkill -= Time.deltaTime;
     }
     else
