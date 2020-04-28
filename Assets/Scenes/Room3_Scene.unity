@@ -993,8 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f957717f43940c09d69cc47fe33afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  skillImage: {fileID: 0}
+  player: {fileID: 1085722204}
+  skillImage: {fileID: 380801671}
   attkRange: 0
   startTimeAtk: 0
   startTimeSkill: 0
