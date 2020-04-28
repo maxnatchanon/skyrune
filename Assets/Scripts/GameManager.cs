@@ -110,9 +110,9 @@ public class GameManager
     pickedRune = rune;
   }
 
-  public void UsePotion()
+  public void UsePotion(bool isGodMode)
   {
-    if (numberOfPotions > 0)
+    if (numberOfPotions > 0 || isGodMode)
     {
       numberOfPotions -= 1;
       health = Math.Min(maxHealth, health + potionPower);

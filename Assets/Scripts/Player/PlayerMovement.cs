@@ -159,7 +159,13 @@ public class PlayerMovement : MonoBehaviour {
         // Potion
         if (Input.GetKeyDown(KeyCode.Space) && currentPotionTime >= potionInterval) {
             currentPotionTime = 0;
-            GameManager.instance.UsePotion();
+            GameManager.instance.UsePotion(false);
+        }
+
+        // God Potion
+        if (Input.GetKeyDown(KeyCode.P) && currentPotionTime >= potionInterval / 2) {
+            currentPotionTime = 0;
+            GameManager.instance.UsePotion(true);
         }
 
         currentMeleeAttackTime += Time.deltaTime;

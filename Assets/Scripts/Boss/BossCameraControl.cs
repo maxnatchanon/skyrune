@@ -6,14 +6,15 @@ using Cinemachine;
 public class BossCameraControl : MonoBehaviour
 {
 	float amp = 2f;
-	float duration = 0.5f;
 	float currentDuration = 1f;
 
+	public float duration = 0.5f;
 	public CinemachineVirtualCamera cam;
 	CinemachineBasicMultiChannelPerlin noise;
 
 	void Start()
 	{
+		currentDuration = duration;
 		noise = cam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
 	}
 
