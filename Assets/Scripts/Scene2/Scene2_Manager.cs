@@ -33,6 +33,7 @@ public class Scene2_Manager : MonoBehaviour
     public GameObject blue;
     public GameObject red;
     public GameObject purple;
+    public GameObject green;
 
     private float bossMaxHp;
     private float bossHp;
@@ -47,6 +48,7 @@ public class Scene2_Manager : MonoBehaviour
         red.SetActive(false);
         purple.SetActive(false);
         blue.SetActive(false);
+        green.SetActive(false);
         SetS(false);
 
         RunePickUp = GameObject.Find("/YellowRunePickup");
