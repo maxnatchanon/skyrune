@@ -7,7 +7,7 @@ public class RunePickup : MonoBehaviour {
 	public Transform player;
 	public PlayerHoverText text;
 
-	bool isUnlocked = true;
+	bool isUnlocked = false;
 
 	void Update() {
 	Vector3 tmp = transform.position;
