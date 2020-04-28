@@ -23,7 +23,7 @@ public class Boss : MonoBehaviour
 
     float moveSpeed = 1.25f;
 
-    float nextAttackTime = 3f;
+    float nextAttackTime = 2.5f;
 
     float shieldDuration = 5f;
     float currentShieldDuration = 0f;
@@ -157,6 +157,7 @@ public class Boss : MonoBehaviour
                 Vector2 lookDir = new Vector2(x, y);
                 Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 3, attackPos.y + lookDir.y * 3);
                 GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
+                fireball.name = "Boss Fireball";
                 Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
                 fireball.GetComponent<Fireball>().isPlayerFireball = false;
                 rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);
@@ -170,6 +171,7 @@ public class Boss : MonoBehaviour
                 Vector2 lookDir = new Vector2(x, y);
                 Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 3, attackPos.y + lookDir.y * 3);
                 GameObject fireball = Instantiate(fireballPrefab, attackPoint, Quaternion.identity);
+                fireball.name = "Boss Fireball";
                 Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
                 fireball.GetComponent<Fireball>().isPlayerFireball = false;
                 rb.AddForce(lookDir * fireballForce, ForceMode2D.Impulse);

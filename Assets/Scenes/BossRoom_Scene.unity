@@ -4330,6 +4330,50 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &694155801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694155803}
+  - component: {fileID: 694155802}
+  m_Layer: 0
+  m_Name: CameraControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &694155802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694155801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0efbbb3beac462c9df0fc8cd175783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2129592809}
+--- !u!4 &694155803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694155801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &787252646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8844,6 +8888,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7539989150966377408, guid: cd603692b91b34a908cc6e29a62a6af4,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539989150966377408, guid: cd603692b91b34a908cc6e29a62a6af4,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.6424251
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539989150966377408, guid: cd603692b91b34a908cc6e29a62a6af4,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.0039215684
+      objectReference: {fileID: 0}
     - target: {fileID: 7539989150966377411, guid: cd603692b91b34a908cc6e29a62a6af4,
         type: 3}
       propertyPath: m_Name
@@ -8924,6 +8983,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814133511}
   m_CullTransparentMesh: 0
+--- !u!1 &1833863252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5035855888587627949, guid: 06a091a94ff2348819827c495c96098c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1486375477}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1833863256
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833863252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 3
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &1835236448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5655173351261160134, guid: e05ac136a5d894bfdbdc4ad5fea25f3a,
@@ -9020,6 +9102,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8519790b18ad9854baff941c75e84710, type: 3}
+--- !u!114 &2129592809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1806508420547485095, guid: 06a091a94ff2348819827c495c96098c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1486375477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3783540449252990105
 PrefabInstance:
   m_ObjectHideFlags: 0
