@@ -47,12 +47,12 @@ public class MiniBoss : MonoBehaviour
     AttackPlayer();
     SkillPlayer();
     CheckHealth();
-    if (Health <= 200)
+    if (Health <= 250)
     {
       shieldMachanic();
     }
 
-    if (Health <= 250)
+    if (Health <= 300)
     {
       stage2();
     }
@@ -156,7 +156,7 @@ public class MiniBoss : MonoBehaviour
   void stage3()
   {
     float teleportRange = 3f;
-    if (timeBtwTeleport <= 0f && Vector2.Distance(transform.position, player.transform.position) >= 5f)
+    if (timeBtwTeleport <= 0f && Vector2.Distance(transform.position, player.transform.position) >= 5f && !isShield)
     {
       GetComponent<Renderer>().material.color = new Color(0f, 1f, 1f, 1f);
       if (player.transform.position.y < -40f)

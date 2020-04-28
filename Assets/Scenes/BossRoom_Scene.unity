@@ -9453,12 +9453,12 @@ PrefabInstance:
     - target: {fileID: 1765831549666107280, guid: c027df6405e354bc6b22789d21b2c007,
         type: 3}
       propertyPath: health
-      value: 50
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1765831549666107280, guid: c027df6405e354bc6b22789d21b2c007,
         type: 3}
       propertyPath: maxHealth
-      value: 200
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 8868908081334325745, guid: c027df6405e354bc6b22789d21b2c007,
         type: 3}
