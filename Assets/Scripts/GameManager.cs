@@ -55,6 +55,7 @@ public class GameManager
   public float timeBtwCount;
 
   public bool isPlaying = true;
+  public bool showTutorial = true;
 
   void InitializeGame()
   {
@@ -112,7 +113,10 @@ public class GameManager
 
   public void UsePotion(bool isGodMode)
   {
-    if (numberOfPotions > 0 || isGodMode)
+    if (isGodMode) {
+      health = Math.Min(maxHealth, health + potionPower);
+    }
+    else if (numberOfPotions > 0 || isGodMode)
     {
       numberOfPotions -= 1;
       health = Math.Min(maxHealth, health + potionPower);
@@ -202,6 +206,7 @@ public class GameManager
   {
     InitializeGame();
     isPlaying = true;
+    showTutorial = true;
     Debug.Log("HERE!");
 
     SceneLoader sceneLoader = UnityEngine.Object.FindObjectOfType<SceneLoader>();

@@ -35,8 +35,8 @@ public class Boss : MonoBehaviour
 
     float fireballForce = 8f * 0.0001f;
 
-    float fireBulletInterval = 0.5f;
-    float fireBulletTime = 0.5f;
+    float fireBulletInterval = 1f;
+    float fireBulletTime = 1f;
 
     bool potionSpawned = false;
 
@@ -75,7 +75,7 @@ public class Boss : MonoBehaviour
                 fireBulletTime = 0f;
             }
 
-            if (health / maxHealth < 0.9 && !potionSpawned) {
+            if (health / maxHealth < 0.5 && !potionSpawned) {
                 potionSpawned = true;
                 GameObject.Instantiate(potionPrefab, meteorPos[0], Quaternion.identity);
                 GameObject.Instantiate(potionPrefab, meteorPos[4], Quaternion.identity);

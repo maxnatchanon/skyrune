@@ -36,8 +36,8 @@ public class PlayerMovement : MonoBehaviour {
 
     float fireballForce = 10f * 0.0001f;
 
-    float potionInterval = 2f;
-    float currentPotionTime = 2f;
+    float potionInterval = 1f;
+    float currentPotionTime = 1f;
 
     float currentSlowTime = 0f;
 
