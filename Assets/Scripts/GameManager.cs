@@ -113,14 +113,8 @@ public class GameManager
 
   public void UsePotion(bool isGodMode)
   {
-    if (isGodMode) {
-      health = Math.Min(maxHealth, health + potionPower);
-    }
-    else if (numberOfPotions > 0 || isGodMode)
-    {
-      numberOfPotions -= 1;
-      health = Math.Min(maxHealth, health + potionPower);
-    }
+    health = Math.Min(maxHealth, health + potionPower);
+    numberOfPotions = (isGodMode)? numberOfPotions : numberOfPotions - 1;
   }
 
   public void ReduceHealth(int damage)
