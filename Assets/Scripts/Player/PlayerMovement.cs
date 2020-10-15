@@ -3,48 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	public float moveSpeed = 5f;
-    float currentMoveSpeed = 5f;
-	public float dashSpeed = 8f;
-
+    public float moveSpeed = 5f;
+    public float dashSpeed = 8f;
     public Transform tf;
-	public Rigidbody2D rb;
+    public Rigidbody2D rb;
     public SpriteRenderer sr;
-	public Animator animator;
+    public Animator animator;
     public Camera cam;
-
     public PlayerHoverText ht;
-
     public GameObject swordPrefab;
     public GameObject fireballPrefab;
-
     public GameObject shield;
-
-	Vector2 movement;
-
-	float meleeAttackInterval = 0.4f;
-	float currentMeleeAttackTime = 0.4f;
-
-	float shootInterval = 0.3f;
-	float shootTime = 0.2f;
-	float currentShootTime = 0.2f;
-
-	float dashInterval = 1f;
-	float dashTime = 0.25f;
-	float currentDashTime = 0.25f;
-	Vector2 dashDir;
-
+    Vector2 movement;
+    Vector2 dashDir;
+    float currentMoveSpeed = 5f;
+    float meleeAttackInterval = 0.4f;
+    float currentMeleeAttackTime = 0.4f;
+    float shootInterval = 0.3f;
+    float shootTime = 0.2f;
+    float currentShootTime = 0.2f;
+    float dashInterval = 1f;
+    float dashTime = 0.25f;
+    float currentDashTime = 0.25f;
     float fireballForce = 10f * 0.0001f;
-
     float potionInterval = 1f;
     float currentPotionTime = 1f;
-
     float currentSlowTime = 0f;
-
     float shieldTime = 8f;
     float shieldInterval = 38f;
     float currentShieldTime = 38f;
-
     float freezeTime = 4f;
     float freezeInterval = 38f;
     float currentFreezeTime = 38f;
@@ -70,7 +57,11 @@ public class PlayerMovement : MonoBehaviour {
 
         if (GameManager.instance.CurrentScene() != "MainRoom_Scene") return;
         
-        if (GameManager.instance.enteredRoom != null) {
+       	setPositionPlayerEnteredRoom();
+    }
+
+    void setPositionPlayerEnteredRoom() {
+	if (GameManager.instance.enteredRoom != null) {
             if (GameManager.instance.enteredRoom == Power.Fireball) {
                 tf.position = new Vector3(-42.6f, 41.0f, 0f);
                 animator.SetFloat("WalkHorizontal", 1);
@@ -88,9 +79,8 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             tf.position = new Vector3(-36.3f, 42.7f, 0f);
         }
-
     }
-
+	
     void Update() {
         if (!GameManager.instance.isPlaying) {
             if (GameManager.instance.health > 0) {
@@ -210,7 +200,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void CheckMeleeAttackRange(Vector2 lookDir) {
-		Vector3 attackPos = GetComponent<Transform>().position;
+	Vector3 attackPos = GetComponent<Transform>().position;
     	Vector2 attackPoint = new Vector2(attackPos.x + lookDir.x * 0.8f, attackPos.y + lookDir.y * 0.9f);
         Instantiate(swordPrefab, attackPoint, Quaternion.identity);
     }
