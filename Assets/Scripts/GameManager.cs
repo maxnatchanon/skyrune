@@ -59,6 +59,9 @@ public class GameManager
 
   void InitializeGame()
   {
+    /**
+    * @brief initialize game status
+    */
     numberOfPotions = 7;
     health = maxHealth;
     pickedRune = null;
