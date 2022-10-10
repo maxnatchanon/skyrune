@@ -29,6 +29,9 @@ public class MiniBoss : MonoBehaviour
   Vector2 pos;
   Vector2 targetPos;
   public bool isShield = false;
+  private float HealthForShieldMachanic = 250;
+  private float HealthStage2 = 300;
+  private float HealthStage3 = 200;
   // Start is called before the first frame update
   void Start()
   {
@@ -49,16 +52,16 @@ public class MiniBoss : MonoBehaviour
     AttackPlayer();
     SkillPlayer();
     CheckHealth();
-    if (Health <= 250)
+    if (Health <= HealthForShieldMachanic)
     {
       shieldMachanic();
     }
 
-    if (Health <= 300)
+    if (Health <= HealthStage2)
     {
       stage2();
     }
-    if (Health <= 200)
+    if (Health <= HealthStage3)
     {
       if (!isShield)
       {
